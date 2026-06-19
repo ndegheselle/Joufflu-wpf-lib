@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Usuel.Shared
+namespace Usuel.Data
 {
     public interface ICustomCommand : ICommand
     {

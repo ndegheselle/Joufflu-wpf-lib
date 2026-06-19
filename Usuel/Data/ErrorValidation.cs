@@ -2,16 +2,16 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Usuel.Shared
+namespace Usuel.Data
 {
     public class ErrorValidation : INotifyDataErrorInfo
     {
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-        
+
         public bool HasErrors => _errors.Count > 0;
 
         private readonly Dictionary<string, List<string>> _errors = [];
-        
+
         public IEnumerable GetErrors(string? propertyName)
         {
             if (propertyName == null)

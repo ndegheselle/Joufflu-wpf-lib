@@ -7,9 +7,6 @@ using Usuel.Shared;
 
 namespace Joufflu.Data
 {
-    /// <summary>
-    /// TODO : Use command and a control template
-    /// </summary>
     public partial class Paging : Control, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;

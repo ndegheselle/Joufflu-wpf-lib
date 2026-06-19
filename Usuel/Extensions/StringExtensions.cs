@@ -1,4 +1,4 @@
-﻿namespace Usuel.Shared.Extensions
+﻿namespace Usuel.Extensions
 {
     public static class StringExtensions
     {
