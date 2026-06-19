@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Experimental", "Experimenta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usuel", "Usuel\Usuel.csproj", "{6386CDD8-688E-4B35-8837-6983A7F86BD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joufflu", "Joufflu\Joufflu.csproj", "{61C27C74-620A-4499-A6EB-53BC12B17050}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{6386CDD8-688E-4B35-8837-6983A7F86BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6386CDD8-688E-4B35-8837-6983A7F86BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6386CDD8-688E-4B35-8837-6983A7F86BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C27C74-620A-4499-A6EB-53BC12B17050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C27C74-620A-4499-A6EB-53BC12B17050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C27C74-620A-4499-A6EB-53BC12B17050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C27C74-620A-4499-A6EB-53BC12B17050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

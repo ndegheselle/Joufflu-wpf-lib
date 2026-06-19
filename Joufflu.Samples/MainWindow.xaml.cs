@@ -1,13 +1,12 @@
-﻿using AdonisUI.Controls;
-using System.ComponentModel;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using AdonisUI.Controls;
 
 namespace Joufflu.Samples
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : AdonisWindow, INotifyPropertyChanged
+    public partial class MainWindow : AdonisWindow
     {
         public MainWindow()
         {
