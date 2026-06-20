@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:Joufflu.Inputs">
     <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type local:Search}">
         <Setter Property="Padding" Value="6,3" />
-        <Setter Property="adonisExtensions:CornerRadiusExtension.CornerRadius" Value="{DynamicResource {x:Static adonisUi:Dimensions.CornerRadius}}"/>
+        <Setter Property="adonisExtensions:CornerRadiusExtension.CornerRadius" Value="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Search}">

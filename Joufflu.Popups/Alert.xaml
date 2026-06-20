@@ -15,8 +15,8 @@
                 <ControlTemplate TargetType="{x:Type local:Alert}">
                     <Border
                         x:Name="AlertContainer"
-                        CornerRadius="{DynamicResource {x:Static adonisUi:Dimensions.CornerRadius}}"
-                        BorderThickness="{DynamicResource {x:Static adonisUi:Dimensions.BorderThickness}}"
+                        CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}"
+                        BorderThickness="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}"
                         Background="{DynamicResource {x:Static adonisUi:Brushes.Layer0BackgroundBrush}}"
                         BorderBrush="{DynamicResource {x:Static adonisUi:Brushes.Layer1BorderBrush}}">
                         <Border.RenderTransform>

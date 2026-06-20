@@ -15,8 +15,8 @@
                             </Border.InputBindings>
                         </Border>
                         <Border
-                            CornerRadius="{DynamicResource {x:Static adonisUi:Dimensions.CornerRadius}}"
-                            BorderThickness="{DynamicResource {x:Static adonisUi:Dimensions.BorderThickness}}"
+                            CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}"
+                            BorderThickness="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}"
                             Background="{DynamicResource {x:Static adonisUi:Brushes.Layer0BackgroundBrush}}"
                             BorderBrush="{DynamicResource {x:Static adonisUi:Brushes.Layer1BorderBrush}}"
                             VerticalAlignment="Center"
@@ -29,7 +29,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Border 
-                                    CornerRadius="{DynamicResource {x:Static adonisUi:Dimensions.CornerRadius}}"
+                                    CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}"
                                     Background="{DynamicResource {x:Static adonisUi:Brushes.Layer1BackgroundBrush}}">
                                     <Grid >
                                     <Grid.ColumnDefinitions>

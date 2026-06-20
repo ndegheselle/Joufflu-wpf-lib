@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:joufflu="clr-namespace:Joufflu"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <Thickness x:Key="{x:Static joufflu:Dimensions.BorderThickness}">1</Thickness>
+    <CornerRadius x:Key="{x:Static joufflu:Dimensions.CornerRadius}">8</CornerRadius>
+    <system:Double x:Key="{x:Static joufflu:Dimensions.HorizontalSpace}">8</system:Double>
+    <system:Double x:Key="{x:Static joufflu:Dimensions.VerticalSpace}">8</system:Double>
+
+</ResourceDictionary>

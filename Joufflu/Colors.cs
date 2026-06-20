@@ -4,44 +4,17 @@ namespace Joufflu;
 
 public static class Colors
 {
-    // Foreground (50 → 950)
-    public static ComponentResourceKey ForegroundColor50 => new ComponentResourceKey(typeof(Colors), "ForegroundColor50");
-    public static ComponentResourceKey ForegroundColor100 => new ComponentResourceKey(typeof(Colors), "ForegroundColor100");
-    public static ComponentResourceKey ForegroundColor200 => new ComponentResourceKey(typeof(Colors), "ForegroundColor200");
-    public static ComponentResourceKey ForegroundColor300 => new ComponentResourceKey(typeof(Colors), "ForegroundColor300");
-    public static ComponentResourceKey ForegroundColor400 => new ComponentResourceKey(typeof(Colors), "ForegroundColor400");
-    public static ComponentResourceKey ForegroundColor500 => new ComponentResourceKey(typeof(Colors), "ForegroundColor500");
-    public static ComponentResourceKey ForegroundColor600 => new ComponentResourceKey(typeof(Colors), "ForegroundColor600");
-    public static ComponentResourceKey ForegroundColor700 => new ComponentResourceKey(typeof(Colors), "ForegroundColor700");
-    public static ComponentResourceKey ForegroundColor800 => new ComponentResourceKey(typeof(Colors), "ForegroundColor800");
-    public static ComponentResourceKey ForegroundColor900 => new ComponentResourceKey(typeof(Colors), "ForegroundColor900");
-    public static ComponentResourceKey ForegroundColor950 => new ComponentResourceKey(typeof(Colors), "ForegroundColor950");
+    public static ComponentResourceKey ForegroundColor => new ComponentResourceKey(typeof(Colors), "ForegroundColor");
+    public static ComponentResourceKey Foreground100Color => new ComponentResourceKey(typeof(Colors), "Foreground100Color");
+    public static ComponentResourceKey Foreground200Color => new ComponentResourceKey(typeof(Colors), "Foreground200Color");
 
-    // Border (50 → 950)
-    public static ComponentResourceKey BorderColor50 => new ComponentResourceKey(typeof(Colors), "BorderColor50");
-    public static ComponentResourceKey BorderColor100 => new ComponentResourceKey(typeof(Colors), "BorderColor100");
-    public static ComponentResourceKey BorderColor200 => new ComponentResourceKey(typeof(Colors), "BorderColor200");
-    public static ComponentResourceKey BorderColor300 => new ComponentResourceKey(typeof(Colors), "BorderColor300");
-    public static ComponentResourceKey BorderColor400 => new ComponentResourceKey(typeof(Colors), "BorderColor400");
-    public static ComponentResourceKey BorderColor500 => new ComponentResourceKey(typeof(Colors), "BorderColor500");
-    public static ComponentResourceKey BorderColor600 => new ComponentResourceKey(typeof(Colors), "BorderColor600");
-    public static ComponentResourceKey BorderColor700 => new ComponentResourceKey(typeof(Colors), "BorderColor700");
-    public static ComponentResourceKey BorderColor800 => new ComponentResourceKey(typeof(Colors), "BorderColor800");
-    public static ComponentResourceKey BorderColor900 => new ComponentResourceKey(typeof(Colors), "BorderColor900");
-    public static ComponentResourceKey BorderColor950 => new ComponentResourceKey(typeof(Colors), "BorderColor950");
+    public static ComponentResourceKey BackgroundColor => new ComponentResourceKey(typeof(Colors), "BackgroundColor");
+    public static ComponentResourceKey Background100Color => new ComponentResourceKey(typeof(Colors), "Background100Color");
+    public static ComponentResourceKey Background200Color => new ComponentResourceKey(typeof(Colors), "Background200Color");
 
-    // Background (50 → 950)
-    public static ComponentResourceKey BackgroundColor50 => new ComponentResourceKey(typeof(Colors), "BackgroundColor50");
-    public static ComponentResourceKey BackgroundColor100 => new ComponentResourceKey(typeof(Colors), "BackgroundColor100");
-    public static ComponentResourceKey BackgroundColor200 => new ComponentResourceKey(typeof(Colors), "BackgroundColor200");
-    public static ComponentResourceKey BackgroundColor300 => new ComponentResourceKey(typeof(Colors), "BackgroundColor300");
-    public static ComponentResourceKey BackgroundColor400 => new ComponentResourceKey(typeof(Colors), "BackgroundColor400");
-    public static ComponentResourceKey BackgroundColor500 => new ComponentResourceKey(typeof(Colors), "BackgroundColor500");
-    public static ComponentResourceKey BackgroundColor600 => new ComponentResourceKey(typeof(Colors), "BackgroundColor600");
-    public static ComponentResourceKey BackgroundColor700 => new ComponentResourceKey(typeof(Colors), "BackgroundColor700");
-    public static ComponentResourceKey BackgroundColor800 => new ComponentResourceKey(typeof(Colors), "BackgroundColor800");
-    public static ComponentResourceKey BackgroundColor900 => new ComponentResourceKey(typeof(Colors), "BackgroundColor900");
-    public static ComponentResourceKey BackgroundColor950 => new ComponentResourceKey(typeof(Colors), "BackgroundColor950");
+    public static ComponentResourceKey BorderColor => new ComponentResourceKey(typeof(Brushes), "BorderColor");
+    public static ComponentResourceKey Border100Color => new ComponentResourceKey(typeof(Brushes), "Border100Color");
+    public static ComponentResourceKey Border200Color => new ComponentResourceKey(typeof(Brushes), "Border200Color");
 
     // Primary
     public static ComponentResourceKey PrimaryColor => new ComponentResourceKey(typeof(Colors), "PrimaryColor");
@@ -74,44 +47,17 @@ public static class Colors
 
 public static class Brushes
 {
-    // Foreground (50 → 950)
-    public static ComponentResourceKey ForegroundBrush50 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush50");
-    public static ComponentResourceKey ForegroundBrush100 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush100");
-    public static ComponentResourceKey ForegroundBrush200 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush200");
-    public static ComponentResourceKey ForegroundBrush300 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush300");
-    public static ComponentResourceKey ForegroundBrush400 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush400");
-    public static ComponentResourceKey ForegroundBrush500 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush500");
-    public static ComponentResourceKey ForegroundBrush600 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush600");
-    public static ComponentResourceKey ForegroundBrush700 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush700");
-    public static ComponentResourceKey ForegroundBrush800 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush800");
-    public static ComponentResourceKey ForegroundBrush900 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush900");
-    public static ComponentResourceKey ForegroundBrush950 => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush950");
+    public static ComponentResourceKey ForegroundBrush => new ComponentResourceKey(typeof(Brushes), "ForegroundBrush");
+    public static ComponentResourceKey Foreground100Brush => new ComponentResourceKey(typeof(Brushes), "Foreground100Brush");
+    public static ComponentResourceKey Foreground200Brush => new ComponentResourceKey(typeof(Brushes), "Foreground200Brush");
 
-    // Border (50 → 950)
-    public static ComponentResourceKey BorderBrush50 => new ComponentResourceKey(typeof(Brushes), "BorderBrush50");
-    public static ComponentResourceKey BorderBrush100 => new ComponentResourceKey(typeof(Brushes), "BorderBrush100");
-    public static ComponentResourceKey BorderBrush200 => new ComponentResourceKey(typeof(Brushes), "BorderBrush200");
-    public static ComponentResourceKey BorderBrush300 => new ComponentResourceKey(typeof(Brushes), "BorderBrush300");
-    public static ComponentResourceKey BorderBrush400 => new ComponentResourceKey(typeof(Brushes), "BorderBrush400");
-    public static ComponentResourceKey BorderBrush500 => new ComponentResourceKey(typeof(Brushes), "BorderBrush500");
-    public static ComponentResourceKey BorderBrush600 => new ComponentResourceKey(typeof(Brushes), "BorderBrush600");
-    public static ComponentResourceKey BorderBrush700 => new ComponentResourceKey(typeof(Brushes), "BorderBrush700");
-    public static ComponentResourceKey BorderBrush800 => new ComponentResourceKey(typeof(Brushes), "BorderBrush800");
-    public static ComponentResourceKey BorderBrush900 => new ComponentResourceKey(typeof(Brushes), "BorderBrush900");
-    public static ComponentResourceKey BorderBrush950 => new ComponentResourceKey(typeof(Brushes), "BorderBrush950");
+    public static ComponentResourceKey BackgroundBrush => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush");
+    public static ComponentResourceKey Background100Brush => new ComponentResourceKey(typeof(Brushes), "Background100Brush");
+    public static ComponentResourceKey Background200Brush => new ComponentResourceKey(typeof(Brushes), "Background200Brush");
 
-    // Background (50 → 950)
-    public static ComponentResourceKey BackgroundBrush50 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush50");
-    public static ComponentResourceKey BackgroundBrush100 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush100");
-    public static ComponentResourceKey BackgroundBrush200 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush200");
-    public static ComponentResourceKey BackgroundBrush300 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush300");
-    public static ComponentResourceKey BackgroundBrush400 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush400");
-    public static ComponentResourceKey BackgroundBrush500 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush500");
-    public static ComponentResourceKey BackgroundBrush600 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush600");
-    public static ComponentResourceKey BackgroundBrush700 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush700");
-    public static ComponentResourceKey BackgroundBrush800 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush800");
-    public static ComponentResourceKey BackgroundBrush900 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush900");
-    public static ComponentResourceKey BackgroundBrush950 => new ComponentResourceKey(typeof(Brushes), "BackgroundBrush950");
+    public static ComponentResourceKey BorderBrush => new ComponentResourceKey(typeof(Brushes), "BorderBrush");
+    public static ComponentResourceKey Border100Brush => new ComponentResourceKey(typeof(Brushes), "Border100Brush");
+    public static ComponentResourceKey Border200Brush => new ComponentResourceKey(typeof(Brushes), "Border200Brush");
 
     // Primary
     public static ComponentResourceKey PrimaryBrush => new ComponentResourceKey(typeof(Brushes), "PrimaryBrush");

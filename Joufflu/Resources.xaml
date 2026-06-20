@@ -1,10 +1,11 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
 
-        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Dimensions.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Dimensions.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/FontIcon.xaml" />
 
+        <!--
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/DatePickerDropDownButton.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/Expander.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/Icons.xaml"/>
@@ -12,8 +13,9 @@
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/LoadingCircle.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/LoadingDots.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/ValidationErrorTemplate.xaml"/>
-        
-        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/Button.xaml"/>
+        -->
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/Button.xaml" />
+        <!--
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/Calendar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/CheckBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/ComboBox.xaml"/>
@@ -44,6 +46,7 @@
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/TreeView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/Window.xaml"/>
 
+        -->
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -1,26 +1,15 @@
-﻿using System.Windows.Controls;
-using AdonisUI.Controls;
+﻿using Joufflu.Controls;
 
 namespace Joufflu.Samples
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : AdonisWindow
+    public partial class MainWindow : ThemedWindow
     {
         public MainWindow()
         {
             InitializeComponent();
-            // Foreach tab in MainContainer create a ListBoxItem and add it to the ListBox
-            foreach (TabItem tab in MainContainer.Items)
-            {
-                var item = new ListBoxItem { Content = tab.Header, Tag = tab };
-                item.Selected += (s, e) =>
-                {
-                    MainContainer.SelectedItem = (TabItem)((ListBoxItem)s).Tag;
-                };
-                SideMenu.Items.Add(item);
-            }
         }
     }
 }

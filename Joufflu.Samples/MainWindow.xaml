@@ -1,69 +1,17 @@
-﻿<adonisControls:AdonisWindow
+﻿<controls:ThemedWindow
     x:Class="Joufflu.Samples.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-    xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
-    xmlns:fonts="clr-namespace:Joufflu.Shared.Resources.Fonts;assembly=Joufflu.Shared"
-    xmlns:layouts="clr-namespace:Joufflu.Layouts;assembly=Joufflu.Layouts"
+    xmlns:controls="clr-namespace:Joufflu.Controls;assembly=Joufflu"
+    xmlns:fonts="clr-namespace:Joufflu.Assets.Fonts;assembly=Joufflu"
     xmlns:local="clr-namespace:Joufflu.Samples"
-    xmlns:popups="clr-namespace:Joufflu.Popups;assembly=Joufflu.Popups"
-    xmlns:views="clr-namespace:Joufflu.Samples.Views">
-    <adonisControls:AdonisWindow.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Joufflu.Popups;component/Resources.xaml" />
-    </adonisControls:AdonisWindow.Resources>
-    <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <ListBox x:Name="SideMenu" />
-
-            <TabControl x:Name="MainContainer" Grid.Column="1">
-                <TabItem Header="Inputs" Visibility="Collapsed">
-                    <views:InputsSamples VerticalAlignment="Top" />
-                </TabItem>
-                <TabItem Header="Data" Visibility="Collapsed">
-                    <views:DataSamples />
-                </TabItem>
-                <TabItem Header="Popups" Visibility="Collapsed">
-                    <views:PopupsSamples />
-                </TabItem>
-                <TabItem Header="Layouts" Visibility="Collapsed">
-                    <GroupBox Header="Flexible grid">
-                        <layouts:FlexibleGrid
-                            Columns="2"
-                            ColumnsWidth="200,*"
-                            Gap="4">
-                            <Button Content="Button 1" />
-                            <Button Content="Button 2" />
-
-                            <Button Content="Button 3" />
-                            <Button Content="Button 4" />
-
-                            <Button Content="Button 5" />
-                            <Button Content="Button 6" />
-
-                            <Button Content="Button 7" />
-                            <Button Content="Button 8" />
-
-                            <Button Content="Button 9" />
-                        </layouts:FlexibleGrid>
-                    </GroupBox>
-                </TabItem>
-                <TabItem Header="History" Visibility="Collapsed">
-                    <views:HistorySample />
-                </TabItem>
-                <TabItem Header="Prototypes">
-                    <views:ProtoypesSamples />
-                </TabItem>
-            </TabControl>
-        </Grid>
-
-        <popups:Modal x:Name="Modal" />
-        <popups:Loading x:Name="Loading" />
-        <popups:Alert x:Name="Alert" />
-    </Grid>
-</adonisControls:AdonisWindow>
+    Title="Tata">
+    <StackPanel Margin="4">
+        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Square}" />
+        <StackPanel Orientation="Horizontal">
+            <Button>Test</Button>
+            <Button>Test</Button>
+            <Button>Test</Button>
+        </StackPanel>
+    </StackPanel>
+</controls:ThemedWindow>

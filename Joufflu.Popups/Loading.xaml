@@ -16,7 +16,7 @@
             BorderThickness="1"
             BorderBrush="{DynamicResource {x:Static adonisUi:Brushes.Layer1BorderBrush}}"
             Background="{DynamicResource {x:Static adonisUi:Brushes.Layer1BackgroundBrush}}"
-            CornerRadius="{DynamicResource {x:Static adonisUi:Dimensions.CornerRadius}}"
+            CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}"
             Padding="10,6">
             <StackPanel Orientation="Horizontal">
                 <fonts:Icon
