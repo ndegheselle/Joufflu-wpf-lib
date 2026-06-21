@@ -6,7 +6,6 @@
 
     <Thickness x:Key="{x:Static joufflu:Dimensions.BorderThickness}">1</Thickness>
     <CornerRadius x:Key="{x:Static joufflu:Dimensions.CornerRadius}">8</CornerRadius>
-    <system:Double x:Key="{x:Static joufflu:Dimensions.HorizontalSpace}">8</system:Double>
-    <system:Double x:Key="{x:Static joufflu:Dimensions.VerticalSpace}">8</system:Double>
+    <Thickness x:Key="{x:Static joufflu:Dimensions.Spacing}">8,4</Thickness>
 
 </ResourceDictionary>

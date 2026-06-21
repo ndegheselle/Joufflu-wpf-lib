@@ -7,11 +7,24 @@
     xmlns:local="clr-namespace:Joufflu.Samples"
     Title="Tata">
     <StackPanel Margin="4">
-        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Square}" />
         <StackPanel Orientation="Horizontal">
             <Button>Test</Button>
+            <Button IsEnabled="False">Test</Button>
+
+
+            <Button Style="{StaticResource Primary}">Test</Button>
+            <Button Style="{StaticResource Secondary}">Test</Button>
+            <Button Style="{StaticResource Ghost}">Test</Button>
+            <Button Style="{StaticResource Danger}">Test</Button>
+            <Button Style="{StaticResource Success}">Test</Button>
+
             <Button>Test</Button>
+
             <Button>Test</Button>
+
+            <Button>
+                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Leaf}" />
+            </Button>
         </StackPanel>
     </StackPanel>
 </controls:ThemedWindow>
