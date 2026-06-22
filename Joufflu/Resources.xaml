@@ -15,7 +15,6 @@
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/ValidationErrorTemplate.xaml"/>
         -->
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/Button.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Named/Button.xaml" />
         <!--
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/Calendar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/CheckBox.xaml"/>
