@@ -18,4 +18,9 @@
     <system:Double x:Key="{x:Static joufflu:Sizes.ControlFontSizeMd}">13</system:Double>
     <system:Double x:Key="{x:Static joufflu:Sizes.ControlFontSizeLg}">15</system:Double>
 
+    <Thickness x:Key="{x:Static joufflu:Sizes.ControlPaddingXs}">4,2</Thickness>
+    <Thickness x:Key="{x:Static joufflu:Sizes.ControlPaddingSm}">6,3</Thickness>
+    <Thickness x:Key="{x:Static joufflu:Sizes.ControlPaddingMd}">8,4</Thickness>
+    <Thickness x:Key="{x:Static joufflu:Sizes.ControlPaddingLg}">12,6</Thickness>
+
 </ResourceDictionary>
