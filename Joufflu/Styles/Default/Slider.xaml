@@ -1,10 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
-                    xmlns:joufflu="clr-namespace:Joufflu"
-                    xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
-                    xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-                    xmlns:adonisConverters="clr-namespace:AdonisUI.Converters;assembly=AdonisUI">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:joufflu="clr-namespace:Joufflu">
 
     <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -21,30 +18,26 @@
     </Style>
 
     <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType=Slider}}"/>
-        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=Slider}}"/>
-        <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType=Slider}}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding adonisExtensions:CornerRadiusExtension.CornerRadius}"/>
+                    <Border
+                        x:Name="ThumbBorder"
+                        Background="{DynamicResource {x:Static joufflu:Brushes.AccentBrush}}"
+                        CornerRadius="4" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.Accent100Brush}}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.Accent100Brush}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-        <Style.Triggers>
-
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush300}}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.BorderBrush300}}"/>
-            </Trigger>
-
-        </Style.Triggers>
     </Style>
 
     <ControlTemplate x:Key="HorizontalSlider" TargetType="{x:Type Slider}">
@@ -55,70 +48,66 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TickBar x:Name="TopTick"
-                     SnapsToDevicePixels="True"
-                     Placement="Top"
-                     Height="4"
-                     Visibility="Collapsed"
-                     Fill="{TemplateBinding BorderBrush}"
-                     Margin="0, 0, 0, 2"/>
+            <TickBar
+                x:Name="TopTick"
+                Grid.Row="0"
+                Height="4"
+                Fill="{TemplateBinding BorderBrush}"
+                Margin="0,0,0,2"
+                Placement="Top"
+                SnapsToDevicePixels="True"
+                Visibility="Collapsed" />
 
-            <Border x:Name="TrackBackground"
-                    Grid.Row="1"
-                    Height="4"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{TemplateBinding adonisExtensions:CornerRadiusExtension.CornerRadius}"/>
+            <Border
+                x:Name="TrackBackground"
+                Grid.Row="1"
+                Height="4"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}" />
 
-            <Track Grid.Row="1"
-                   x:Name="PART_Track">
+            <Track Grid.Row="1" x:Name="PART_Track">
                 <Track.DecreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderButtonStyle}"
-                                  Command="Slider.DecreaseLarge" />
+                    <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderButtonStyle}" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource SliderThumbStyle}"
-                           VerticalAlignment="Stretch"
-                           Width="10"
-                           adonisExtensions:CornerRadiusExtension.CornerRadius="{TemplateBinding adonisExtensions:CornerRadiusExtension.CornerRadius}"/>
+                    <Thumb
+                        Width="10"
+                        Style="{StaticResource SliderThumbStyle}"
+                        VerticalAlignment="Stretch" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderButtonStyle}"
-                                  Command="Slider.IncreaseLarge" />
+                    <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderButtonStyle}" />
                 </Track.IncreaseRepeatButton>
             </Track>
 
-            <TickBar x:Name="BottomTick"
-                     Grid.Row="2"
-                     Placement="Bottom"
-                     Height="4"
-                     Fill="{TemplateBinding BorderBrush}"
-                     SnapsToDevicePixels="True"
-                     Visibility="Collapsed"
-                     Margin="0, 2, 0, 0"/>
+            <TickBar
+                x:Name="BottomTick"
+                Grid.Row="2"
+                Height="4"
+                Fill="{TemplateBinding BorderBrush}"
+                Margin="0,2,0,0"
+                Placement="Bottom"
+                SnapsToDevicePixels="True"
+                Visibility="Collapsed" />
         </Grid>
 
         <ControlTemplate.Triggers>
-
             <Trigger Property="TickPlacement" Value="TopLeft">
                 <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
             </Trigger>
-
             <Trigger Property="TickPlacement" Value="BottomRight">
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
-
             <Trigger Property="TickPlacement" Value="Both">
                 <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
-
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="VerticalSlider"
-                     TargetType="{x:Type Slider}">
+    <ControlTemplate x:Key="VerticalSlider" TargetType="{x:Type Slider}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -126,133 +115,119 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TickBar x:Name="TopTick" 
-                     SnapsToDevicePixels="True"
-                     Placement="Left"
-                     Width="4"
-                     Visibility="Collapsed"
-                     Fill="{TemplateBinding BorderBrush}"
-                     Margin="0, 0, 2, 0"/>
+            <TickBar
+                x:Name="TopTick"
+                Grid.Column="0"
+                Width="4"
+                Fill="{TemplateBinding BorderBrush}"
+                Margin="0,0,2,0"
+                Placement="Left"
+                SnapsToDevicePixels="True"
+                Visibility="Collapsed" />
 
-            <Border x:Name="TrackBackground"
-                    Grid.Column="1"
-                    Width="4"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{TemplateBinding adonisExtensions:CornerRadiusExtension.CornerRadius}"/>
+            <Border
+                x:Name="TrackBackground"
+                Grid.Column="1"
+                Width="4"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}" />
 
-            <Track Grid.Column="1"
-                   x:Name="PART_Track">
+            <Track Grid.Column="1" x:Name="PART_Track">
                 <Track.DecreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderButtonStyle}"
-                                  Command="Slider.DecreaseLarge" />
+                    <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderButtonStyle}" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource SliderThumbStyle}"
-                           HorizontalAlignment="Stretch"
-                           Height="10"
-                           adonisExtensions:CornerRadiusExtension.CornerRadius="{TemplateBinding adonisExtensions:CornerRadiusExtension.CornerRadius}"/>
+                    <Thumb
+                        Height="10"
+                        Style="{StaticResource SliderThumbStyle}"
+                        HorizontalAlignment="Stretch" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderButtonStyle}"
-                                  Command="Slider.IncreaseLarge" />
+                    <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderButtonStyle}" />
                 </Track.IncreaseRepeatButton>
             </Track>
 
-            <TickBar x:Name="BottomTick"
-                     SnapsToDevicePixels="True"
-                     Grid.Column="2"
-                     Fill="{TemplateBinding BorderBrush}"
-                     Placement="Right"
-                     Width="4"
-                     Visibility="Collapsed"
-                     Margin="2, 0, 0, 0"/>
+            <TickBar
+                x:Name="BottomTick"
+                Grid.Column="2"
+                Width="4"
+                Fill="{TemplateBinding BorderBrush}"
+                Margin="2,0,0,0"
+                Placement="Right"
+                SnapsToDevicePixels="True"
+                Visibility="Collapsed" />
         </Grid>
 
         <ControlTemplate.Triggers>
-
             <Trigger Property="TickPlacement" Value="TopLeft">
                 <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
             </Trigger>
-
             <Trigger Property="TickPlacement" Value="BottomRight">
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
-
             <Trigger Property="TickPlacement" Value="Both">
                 <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
-
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="{x:Type Slider}" TargetType="Slider">
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static joufflu:Brushes.ForegroundBrush900}}"/>
-        <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush100}}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.BorderBrush100}}"/>
-        <Setter Property="BorderThickness" Value="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}"/>
-        <Setter Property="adonisExtensions:CornerRadiusExtension.CornerRadius" Value="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}"/>
-        <Setter Property="Height" Value="16"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="UseLayoutRounding" Value="True"/>
-        <Setter Property="Template" Value="{StaticResource HorizontalSlider}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static joufflu:Brushes.ForegroundBrush}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.Background100Brush}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.BorderBrush}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Template" Value="{StaticResource HorizontalSlider}" />
 
         <Style.Triggers>
-
             <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="Template" Value="{StaticResource VerticalSlider}"/>
-                <Setter Property="Width" Value="16"/>
-                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="Template" Value="{StaticResource VerticalSlider}" />
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="Auto" />
             </Trigger>
-
             <Trigger Property="TickPlacement" Value="TopLeft">
-                <Setter Property="Height" Value="22"/>
+                <Setter Property="Height" Value="22" />
             </Trigger>
-
             <Trigger Property="TickPlacement" Value="BottomRight">
-                <Setter Property="Height" Value="22"/>
+                <Setter Property="Height" Value="22" />
             </Trigger>
-
             <Trigger Property="TickPlacement" Value="Both">
-                <Setter Property="Height" Value="28"/>
+                <Setter Property="Height" Value="28" />
             </Trigger>
-
             <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="TickPlacement" Value="TopLeft"/>
-                    <Condition Property="Orientation" Value="Vertical"/>
+                    <Condition Property="TickPlacement" Value="TopLeft" />
+                    <Condition Property="Orientation" Value="Vertical" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Width" Value="22"/>
-                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="Width" Value="22" />
+                <Setter Property="Height" Value="Auto" />
             </MultiTrigger>
-
             <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="TickPlacement" Value="BottomRight"/>
-                    <Condition Property="Orientation" Value="Vertical"/>
+                    <Condition Property="TickPlacement" Value="BottomRight" />
+                    <Condition Property="Orientation" Value="Vertical" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Width" Value="22"/>
-                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="Width" Value="22" />
+                <Setter Property="Height" Value="Auto" />
             </MultiTrigger>
-
             <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="TickPlacement" Value="Both"/>
-                    <Condition Property="Orientation" Value="Vertical"/>
+                    <Condition Property="TickPlacement" Value="Both" />
+                    <Condition Property="Orientation" Value="Vertical" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Width" Value="28"/>
-                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="Width" Value="28" />
+                <Setter Property="Height" Value="Auto" />
             </MultiTrigger>
-
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static joufflu:Brushes.ForegroundBrush400}}"/>
-                <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush50}}"/>
+                <Setter Property="Opacity" Value="0.6" />
             </Trigger>
-
         </Style.Triggers>
     </Style>
 

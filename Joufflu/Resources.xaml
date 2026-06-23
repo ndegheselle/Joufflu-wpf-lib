@@ -15,6 +15,13 @@
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Templates/ValidationErrorTemplate.xaml"/>
         -->
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/CheckBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/Label.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/ProgressBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/RadioButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/Slider.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/ToggleButton.xaml" />
         <!--
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/Calendar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/DefaultStyles/CheckBox.xaml"/>
