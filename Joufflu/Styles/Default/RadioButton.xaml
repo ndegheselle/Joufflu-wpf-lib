@@ -1,73 +1,65 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
-                    xmlns:joufflu="clr-namespace:Joufflu"
-                    xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:joufflu="clr-namespace:Joufflu">
 
     <Style x:Key="{x:Type RadioButton}" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static joufflu:Brushes.ForegroundBrush900}}"/>
-        <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush100}}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.BorderBrush100}}"/>
-        <Setter Property="BorderThickness" Value="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}"/>
-        <Setter Property="Padding" Value="{adonisUi:Space 0.5, 0, 0, 0}"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static joufflu:Brushes.ForegroundBrush}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.BorderBrush}}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}" />
+        <Setter Property="Padding" Value="6,0,0,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <BulletDecorator Background="Transparent"
-                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    <BulletDecorator
+                        Background="Transparent"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                         <BulletDecorator.Bullet>
-                            <Grid Width="14"
-                                  Height="14">
-
-                                <Ellipse x:Name="Border"
-                                         Fill="{TemplateBinding Background}"
-                                         StrokeThickness="{TemplateBinding BorderThickness}"
-                                         Stroke="{TemplateBinding BorderBrush}" />
-
-                                <Ellipse x:Name="CheckMark"
-                                         Margin="4"
-                                         Fill="{TemplateBinding Foreground}" />
-
+                            <Grid Width="16" Height="16">
+                                <Ellipse
+                                    x:Name="OuterCircle"
+                                    Fill="{TemplateBinding Background}"
+                                    Stroke="{TemplateBinding BorderBrush}"
+                                    StrokeThickness="1" />
+                                <Ellipse
+                                    x:Name="InnerCircle"
+                                    Margin="4"
+                                    Fill="{DynamicResource {x:Static joufflu:Brushes.PrimaryContentBrush}}"
+                                    Visibility="Collapsed" />
                             </Grid>
                         </BulletDecorator.Bullet>
 
-                        <ContentPresenter Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          RecognizesAccessKey="True"/>
+                        <ContentPresenter
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True" />
                     </BulletDecorator>
 
                     <ControlTemplate.Triggers>
-
-                        <Trigger Property="IsChecked" Value="false">
-                            <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="OuterCircle" Property="Fill" Value="{DynamicResource {x:Static joufflu:Brushes.PrimaryBrush}}" />
+                            <Setter TargetName="OuterCircle" Property="Stroke" Value="{DynamicResource {x:Static joufflu:Brushes.PrimaryBrush}}" />
+                            <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible" />
                         </Trigger>
-
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
 
         <Style.Triggers>
-
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush300}}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.BorderBrush300}}"/>
+                <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.Background100Brush}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.Border100Brush}}" />
             </Trigger>
-
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.AccentBrush}}"/>
-            </Trigger>
-
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static joufflu:Brushes.ForegroundBrush400}}"/>
-                <Setter Property="Background" Value="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush50}}"/>
+                <Setter Property="Opacity" Value="0.6" />
             </Trigger>
-
         </Style.Triggers>
     </Style>
 
