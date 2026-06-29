@@ -1,30 +1,27 @@
-﻿<controls:ThemedWindow
+<controls:ThemedWindow
     x:Class="Joufflu.Samples.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Joufflu.Controls;assembly=Joufflu"
-    xmlns:fonts="clr-namespace:Joufflu.Assets.Fonts;assembly=Joufflu"
-    xmlns:local="clr-namespace:Joufflu.Samples"
-    Title="Tata">
-    <StackPanel Margin="4">
-        <StackPanel Orientation="Horizontal">
-            <Button>Test</Button>
-            <Button IsEnabled="False">Test</Button>
+    xmlns:nav="clr-namespace:Joufflu.Navigation;assembly=Joufflu"
+    xmlns:vm="clr-namespace:Joufflu.Samples.ViewModels"
+    Title="Joufflu — Component Gallery"
+    Width="1100"
+    Height="720"
+    WindowStartupLocation="CenterScreen">
+    <controls:ThemedWindow.DataContext>
+        <vm:MainViewModel />
+    </controls:ThemedWindow.DataContext>
 
+    <DockPanel>
+        <nav:NavigationMenu
+            DockPanel.Dock="Left"
+            ItemsSource="{Binding Menu}"
+            Navigator="{Binding Navigator}" />
 
-            <Button Style="{StaticResource Primary}">Test</Button>
-            <Button Style="{StaticResource Secondary}">Test</Button>
-            <Button Style="{StaticResource Ghost}">Test</Button>
-            <Button Style="{StaticResource Danger}">Test</Button>
-            <Button Style="{StaticResource Success}">Test</Button>
-
-            <Button>Test</Button>
-
-            <Button>Test</Button>
-
-            <Button>
-                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Leaf}" />
-            </Button>
-        </StackPanel>
-    </StackPanel>
+        <nav:NavigationContainer
+            Navigator="{Binding Navigator}"
+            Overlays="{Binding Overlays}"
+            Toasts="{Binding Toasts}" />
+    </DockPanel>
 </controls:ThemedWindow>

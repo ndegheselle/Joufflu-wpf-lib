@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/FontIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/ThemedWindow.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Joufflu;component/Styles/Default/Navigation.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
