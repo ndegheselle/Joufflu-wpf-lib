@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdonisUI" Version="1.17.1" />
-    <PackageReference Include="AdonisUI.ClassicTheme" Version="1.17.1" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Joufflu\Joufflu.csproj" />
     <ProjectReference Include="..\Joufflu.Data.Shared\Joufflu.Data.Shared.csproj" />
     <ProjectReference Include="..\Joufflu.Inputs\Joufflu.Inputs.csproj" />
     <ProjectReference Include="..\Joufflu.Shared\Joufflu.Shared.csproj" />
