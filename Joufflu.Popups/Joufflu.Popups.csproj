@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Joufflu\Joufflu.csproj" />
     <ProjectReference Include="..\Joufflu.Shared\Joufflu.Shared.csproj" />
   </ItemGroup>
 
