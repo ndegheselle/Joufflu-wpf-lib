@@ -1,0 +1,18 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:fonts="clr-namespace:Joufflu.Assets.Fonts"
+    xmlns:joufflu="clr-namespace:Joufflu">
+
+    <!--  Phosphor icon font (embedded as a WPF Resource). Family name is "Phosphor".  -->
+    <FontFamily x:Key="Phosphor">/Joufflu;component/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
+
+    <Style x:Key="{x:Type fonts:Icon}" TargetType="{x:Type fonts:Icon}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static joufflu:Brushes.ForegroundBrush}}" />
+        <Setter Property="FontFamily" Value="{StaticResource Phosphor}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+</ResourceDictionary>

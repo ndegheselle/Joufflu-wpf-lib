@@ -1,6 +1,6 @@
 ﻿using System.Windows.Markup;
 
-namespace Joufflu.Shared.Extensions
+namespace Joufflu.Extensions
 {
     /// <summary>
     /// Return the list of values from an enum type.

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Data;
 
-namespace Joufflu.Shared.Converters
+namespace Joufflu.Converters
 {
     public class VisibilityConverter : IValueConverter
     {

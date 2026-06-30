@@ -1,5 +1,5 @@
 ﻿using Joufflu.Data.Shared;
-using Joufflu.Shared.Resources.Fonts;
+using Joufflu.Assets.Fonts;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;

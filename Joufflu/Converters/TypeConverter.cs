@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace Joufflu.Shared.Converters
+namespace Joufflu.Converters
 {
     public class TypeConverter : IValueConverter
     {

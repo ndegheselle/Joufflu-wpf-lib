@@ -5,7 +5,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Joufflu.Shared.Windows
+namespace Joufflu.Helpers
 {
     public class SystemIcons
     {

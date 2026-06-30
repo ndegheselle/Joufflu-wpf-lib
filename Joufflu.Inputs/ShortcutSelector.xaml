@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fonts="clr-namespace:Joufflu.Assets.Fonts;assembly=Joufflu"
     xmlns:joufflu="clr-namespace:Joufflu;assembly=Joufflu"
     xmlns:local="clr-namespace:Joufflu.Inputs"
     LostKeyboardFocus="UserControl_LostKeyboardFocus"
@@ -31,16 +32,10 @@
             BorderThickness="0,1,1,1"
             Click="Clear_Click"
             Visibility="{Binding Shortcut.Count, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource UniversalVisibilityConverter}}">
-            <TextBlock
-                VerticalAlignment="Center"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                Text="&#xf00d;" />
+            <fonts:Icon Text="{x:Static fonts:IconFont.X}" />
         </Button>
         <Button Grid.Column="2" Click="Edit_Click">
-            <TextBlock
-                VerticalAlignment="Center"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                Text="&#xf304;" />
+            <fonts:Icon Text="{x:Static fonts:IconFont.PencilSimple}" />
         </Button>
 
         <TextBlock

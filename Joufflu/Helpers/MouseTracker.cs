@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
-using static Joufflu.Shared.Windows.MouseMoveNative;
+using static Joufflu.Helpers.MouseMoveNative;
 
-namespace Joufflu.Shared.Windows
+namespace Joufflu.Helpers
 {
     public static class MouseMoveNative
     {

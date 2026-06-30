@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace Joufflu.Shared.Windows
+namespace Joufflu.Helpers
 {
     internal static class ClipboardNative
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Joufflu.Shared.Resources.Fonts
+namespace Joufflu.Assets.Fonts
 {
     /// <summary>
     /// All the styling is done in a style.

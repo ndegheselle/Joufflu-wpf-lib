@@ -1,4 +1,4 @@
-﻿namespace Joufflu.Shared.Resources.Fonts
+﻿namespace Joufflu.Assets.Fonts
 {
     /// <summary>
     /// https://phosphoricons.com/

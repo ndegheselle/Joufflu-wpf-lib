@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Joufflu.Shared.Helpers
+namespace Joufflu.Helpers
 {
     internal class FileSystemHelper
     {

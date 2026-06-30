@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Joufflu.Data.Schema.Components"
     mc:Ignorable="d"
-    xmlns:fonts="clr-namespace:Joufflu.Shared.Resources.Fonts;assembly=Joufflu.Shared"
+    xmlns:fonts="clr-namespace:Joufflu.Assets.Fonts;assembly=Joufflu"
     x:Name="ContainerElement">
     <StackPanel DataContext="{Binding ElementName=ContainerElement}" Orientation="Horizontal">
         <fonts:Icon Text="{Binding Icon}" ToolTip="{Binding Type}" />

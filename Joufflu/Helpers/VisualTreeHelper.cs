@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace Joufflu.Shared.Helpers
+namespace Joufflu.Helpers
 {
     public static class MoreVisualTreeHelper
     {

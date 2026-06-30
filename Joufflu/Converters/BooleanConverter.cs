@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Joufflu.Shared.Converters
+namespace Joufflu.Converters
 {
     /// <summary>
     /// Convert any value to a boolean.

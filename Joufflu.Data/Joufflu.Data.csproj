@@ -11,7 +11,6 @@
     <ProjectReference Include="..\Joufflu\Joufflu.csproj" />
     <ProjectReference Include="..\Joufflu.Data.Shared\Joufflu.Data.Shared.csproj" />
     <ProjectReference Include="..\Joufflu.Inputs\Joufflu.Inputs.csproj" />
-    <ProjectReference Include="..\Joufflu.Shared\Joufflu.Shared.csproj" />
   </ItemGroup>
 
 </Project>

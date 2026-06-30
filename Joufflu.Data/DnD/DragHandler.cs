@@ -1,4 +1,4 @@
-﻿using Joufflu.Shared.Windows;
+﻿using Joufflu.Helpers;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
