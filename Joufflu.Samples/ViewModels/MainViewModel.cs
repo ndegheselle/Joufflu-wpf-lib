@@ -23,6 +23,7 @@ public class MainViewModel : ObservableObject
         var buttons = new ButtonsViewModel();
         var inputs = new InputsViewModel();
         var display = new DisplayViewModel();
+        var custom = new CustomControlsViewModel();
         var helpers = new HelpersViewModel();
         var overlays = new OverlaysViewModel(Overlays, Toasts);
         var toasts = new ToastsViewModel(Toasts);
@@ -31,6 +32,7 @@ public class MainViewModel : ObservableObject
         Menu.Add(new NavigationMenuItem { Icon = LucideFontIcons.MousePointerClick, Title = "Buttons", Target = buttons });
         Menu.Add(new NavigationMenuItem { Icon = LucideFontIcons.TextCursorInput, Title = "Inputs", Target = inputs });
         Menu.Add(new NavigationMenuItem { Icon = LucideFontIcons.LayoutDashboard, Title = "Display", Target = display });
+        Menu.Add(new NavigationMenuItem { Icon = LucideFontIcons.Component, Title = "Custom controls", Target = custom });
 
         Menu.Add(new NavigationMenuTitle("Toolkit"));
         Menu.Add(new NavigationMenuItem { Icon = LucideFontIcons.SlidersHorizontal, Title = "Helpers", Target = helpers });

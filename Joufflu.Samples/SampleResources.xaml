@@ -103,6 +103,9 @@
     <DataTemplate DataType="{x:Type vm:ToastsViewModel}">
         <views:ToastsView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CustomControlsViewModel}">
+        <views:CustomControlsView />
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ConfirmViewModel}">
         <views:ConfirmView />
     </DataTemplate>
