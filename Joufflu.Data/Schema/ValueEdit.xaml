@@ -2,12 +2,11 @@
     x:Class="Joufflu.Data.Schema.ValueEdit"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
     xmlns:collections="clr-namespace:System.Collections.Generic;assembly=System.Runtime"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:extensions="clr-namespace:Joufflu.Shared.Extensions;assembly=Joufflu.Shared"
-    xmlns:converters="clr-namespace:Joufflu.Shared.Converters;assembly=Joufflu.Shared"
-    xmlns:fonts="clr-namespace:Joufflu.Shared.Resources.Fonts;assembly=Joufflu.Shared"
+    xmlns:extensions="clr-namespace:Joufflu.Extensions;assembly=Joufflu"
+    xmlns:converters="clr-namespace:Joufflu.Converters;assembly=Joufflu"
+    xmlns:fonts="clr-namespace:Joufflu.Assets.Fonts;assembly=Joufflu"
     xmlns:inputs="clr-namespace:Joufflu.Inputs;assembly=Joufflu.Inputs"
     xmlns:local="clr-namespace:Joufflu.Data.Schema"
     xmlns:components="clr-namespace:Joufflu.Data.Schema.Components"
@@ -125,8 +124,8 @@
                             </inputs:ComboBoxSearch.ItemTemplate>
                         </inputs:ComboBoxSearch>
 
-                        <fonts:Icon
-                            Text="{x:Static fonts:IconFont.Key}"
+                        <fonts:FontIcon
+                            Text="{x:Static fonts:LucideFontIcons.Key}"
                             HorizontalAlignment="Left"
                             Margin="4,0,0,0"
                             IsHitTestVisible="False"
@@ -149,7 +148,7 @@
                                 </Style.Triggers>
                             </Style>
                         </ToggleButton.Style>
-                        <fonts:Icon Text="{x:Static fonts:IconFont.Key}" />
+                        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Key}" />
                     </ToggleButton>
                 </Grid>
                 <DataTemplate.Triggers>
@@ -182,7 +181,7 @@
                         Height="24"
                         Command="{Binding AddValueCommand}"
                         Style="{StaticResource IconButton}">
-                        <fonts:Icon Text="{x:Static fonts:IconFont.Plus}" />
+                        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Plus}" />
                     </Button>
                 </Grid>
                 <DataTemplate.Triggers>
@@ -238,7 +237,7 @@
                         Command="{Binding RemoveCommand}"
                         Style="{StaticResource IconButton}"
                         ToolTip="Remove">
-                        <fonts:Icon Text="{x:Static fonts:IconFont.Trash}" />
+                        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Trash2}" />
                     </Button>
                 </Grid>
                 <DataTemplate.Triggers>

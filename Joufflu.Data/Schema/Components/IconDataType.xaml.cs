@@ -1,5 +1,5 @@
 ﻿using Joufflu.Data.Shared;
-using Joufflu.Shared.Resources.Fonts;
+using Joufflu.Assets.Fonts;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -31,7 +31,7 @@ namespace Joufflu.Data.Schema.Components
             set { SetValue(TypeProperty, value); }
         }
 
-        public string Icon { get; private set; } = IconFont.Quotes;
+        public string Icon { get; private set; } = LucideFontIcons.Quote;
         public bool WithText { get; set; } = true;
 
         public IconDataType()
@@ -46,16 +46,16 @@ namespace Joufflu.Data.Schema.Components
         {
             Icon = Type switch
             {
-                EnumDataType.Object => IconFont.BracketsCurly,
-                EnumDataType.Array => IconFont.BracketsSquare,
-                EnumDataType.Enum => IconFont.ListNumbers,
-                EnumDataType.String => IconFont.Quotes,
-                EnumDataType.Integer => IconFont.HashStraight,
-                EnumDataType.Decimal => IconFont.Hash,
-                EnumDataType.Boolean => IconFont.Check,
-                EnumDataType.DateTime => IconFont.Calendar,
-                EnumDataType.TimeSpan => IconFont.Clock,
-                _ => IconFont.QuestionMark
+                EnumDataType.Object => LucideFontIcons.Braces,
+                EnumDataType.Array => LucideFontIcons.Brackets,
+                EnumDataType.Enum => LucideFontIcons.ListOrdered,
+                EnumDataType.String => LucideFontIcons.Quote,
+                EnumDataType.Integer => LucideFontIcons.Hash,
+                EnumDataType.Decimal => LucideFontIcons.Hash,
+                EnumDataType.Boolean => LucideFontIcons.Check,
+                EnumDataType.DateTime => LucideFontIcons.Calendar,
+                EnumDataType.TimeSpan => LucideFontIcons.Timer,
+                _ => LucideFontIcons.CircleHelp
             };
         }
     }

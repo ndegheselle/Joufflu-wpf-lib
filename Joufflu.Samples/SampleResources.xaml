@@ -1,0 +1,116 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:Joufflu.Samples.Controls"
+    xmlns:joufflu="clr-namespace:Joufflu;assembly=Joufflu"
+    xmlns:vm="clr-namespace:Joufflu.Samples.ViewModels"
+    xmlns:views="clr-namespace:Joufflu.Samples.Views">
+
+    <!--  Live preview + code snippet card  -->
+    <Style TargetType="{x:Type c:CodeExample}">
+        <Setter Property="Margin" Value="0,0,0,16" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:CodeExample}">
+                    <Border
+                        Background="{DynamicResource {x:Static joufflu:Brushes.Background100Brush}}"
+                        BorderBrush="{DynamicResource {x:Static joufflu:Brushes.BorderBrush}}"
+                        BorderThickness="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}"
+                        CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Margin="16,12,16,0">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Text="{TemplateBinding Title}" />
+                                <TextBlock
+                                    x:Name="Desc"
+                                    Margin="0,2,0,0"
+                                    Foreground="{DynamicResource {x:Static joufflu:Brushes.Foreground100Brush}}"
+                                    Text="{TemplateBinding Description}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <Border
+                                Grid.Row="1"
+                                Margin="16"
+                                Padding="16"
+                                Background="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush}}"
+                                BorderBrush="{DynamicResource {x:Static joufflu:Brushes.BorderBrush}}"
+                                BorderThickness="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}"
+                                CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}">
+                                <ContentPresenter />
+                            </Border>
+
+                            <Border
+                                x:Name="CodeArea"
+                                Grid.Row="2"
+                                Margin="16,0,16,16"
+                                Background="{DynamicResource {x:Static joufflu:Brushes.BackgroundBrush}}"
+                                BorderBrush="{DynamicResource {x:Static joufflu:Brushes.BorderBrush}}"
+                                BorderThickness="{DynamicResource {x:Static joufflu:Dimensions.BorderThickness}}"
+                                CornerRadius="{DynamicResource {x:Static joufflu:Dimensions.CornerRadius}}">
+                                <TextBox
+                                    Padding="12"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    FontFamily="Consolas, Cascadia Mono, monospace"
+                                    Foreground="{DynamicResource {x:Static joufflu:Brushes.Foreground100Brush}}"
+                                    IsReadOnly="True"
+                                    Text="{TemplateBinding Code}"
+                                    TextWrapping="NoWrap" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Code" Value="">
+                            <Setter TargetName="CodeArea" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Description" Value="">
+                            <Setter TargetName="Desc" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  View model → view mapping used by the navigation container and overlays  -->
+    <DataTemplate DataType="{x:Type vm:ButtonsViewModel}">
+        <views:ButtonsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:InputsViewModel}">
+        <views:InputsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DisplayViewModel}">
+        <views:DisplayView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:HelpersViewModel}">
+        <views:HelpersView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:OverlaysViewModel}">
+        <views:OverlaysView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ToastsViewModel}">
+        <views:ToastsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CustomControlsViewModel}">
+        <views:CustomControlsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ConfirmViewModel}">
+        <views:ConfirmView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SampleFormViewModel}">
+        <views:SampleFormView />
+    </DataTemplate>
+
+</ResourceDictionary>
