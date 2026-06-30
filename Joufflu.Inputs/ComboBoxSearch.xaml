@@ -72,7 +72,7 @@
                                 Command="{Binding ClearCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 Focusable="False"
                                 Style="{StaticResource IconButtonSmall}">
-                                <fonts:Icon FontSize="10" Text="{x:Static fonts:IconFont.X}" />
+                                <fonts:FontIcon FontSize="10" Text="{x:Static fonts:LucideFontIcons.x}" />
                             </Button>
 
                             <ToggleButton

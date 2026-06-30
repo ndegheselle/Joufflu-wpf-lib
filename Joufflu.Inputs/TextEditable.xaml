@@ -55,7 +55,7 @@
                                 Grid.Column="1"
                                 Command="{Binding EditCommand}"
                                 Style="{StaticResource IconButtonSmall}">
-                                <fonts:Icon Text="{x:Static fonts:IconFont.PencilSimple}" />
+                                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Pencil}" />
                             </Button>
                         </Grid>
 
@@ -82,10 +82,10 @@
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
                                 <Button Command="{Binding CancelCommand}" Style="{StaticResource IconButtonSmall}">
-                                    <fonts:Icon FontSize="10" Text="{x:Static fonts:IconFont.X}" />
+                                    <fonts:FontIcon FontSize="10" Text="{x:Static fonts:LucideFontIcons.x}" />
                                 </Button>
                                 <Button Command="{Binding ValidateCommand}" Style="{StaticResource IconButtonSmall}">
-                                    <fonts:Icon FontSize="10" Text="{x:Static fonts:IconFont.Check}" />
+                                    <fonts:FontIcon FontSize="10" Text="{x:Static fonts:LucideFontIcons.Check}" />
                                 </Button>
                             </StackPanel>
                         </Grid>

@@ -37,13 +37,13 @@
                     Click="Button_Validate"
                     Style="{StaticResource IconButtonSmall}"
                     ToolTip="Validate">
-                    <fonts:Icon Text="{x:Static fonts:IconFont.Check}" />
+                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Check}" />
                 </Button>
                 <Button
                     Click="Button_Cancel"
                     Style="{StaticResource IconButtonSmall}"
                     ToolTip="Cancel">
-                    <fonts:Icon Text="{x:Static fonts:IconFont.X}" />
+                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.x}" />
                 </Button>
             </StackPanel>
 
@@ -57,7 +57,7 @@
                         </Style.Triggers>
                     </Style>
                 </StackPanel.Style>
-                <fonts:Icon Foreground="{DynamicResource {x:Static joufflu:Brushes.WarningBrush}}" Text="{x:Static fonts:IconFont.Warning}" />
+                <fonts:FontIcon Foreground="{DynamicResource {x:Static joufflu:Brushes.WarningBrush}}" Text="{x:Static fonts:LucideFontIcons.AlertTriangle}" />
                 <TextBlock
                     Margin="2,0,0,0"
                     Foreground="{DynamicResource {x:Static joufflu:Brushes.WarningBrush}}"

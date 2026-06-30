@@ -61,7 +61,7 @@
                                                         Command="{Binding RemoveSelectedCmd, RelativeSource={RelativeSource AncestorType=local:ComboBoxTags}}"
                                                         CommandParameter="{Binding}"
                                                         Style="{StaticResource IconButtonSmall}">
-                                                        <fonts:Icon FontSize="10" Text="{x:Static fonts:IconFont.X}" />
+                                                        <fonts:FontIcon FontSize="10" Text="{x:Static fonts:LucideFontIcons.x}" />
                                                     </Button>
                                                 </StackPanel>
                                             </Border>

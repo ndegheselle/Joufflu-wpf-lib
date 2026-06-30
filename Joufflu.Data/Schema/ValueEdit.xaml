@@ -124,8 +124,8 @@
                             </inputs:ComboBoxSearch.ItemTemplate>
                         </inputs:ComboBoxSearch>
 
-                        <fonts:Icon
-                            Text="{x:Static fonts:IconFont.Key}"
+                        <fonts:FontIcon
+                            Text="{x:Static fonts:LucideFontIcons.Key}"
                             HorizontalAlignment="Left"
                             Margin="4,0,0,0"
                             IsHitTestVisible="False"
@@ -148,7 +148,7 @@
                                 </Style.Triggers>
                             </Style>
                         </ToggleButton.Style>
-                        <fonts:Icon Text="{x:Static fonts:IconFont.Key}" />
+                        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Key}" />
                     </ToggleButton>
                 </Grid>
                 <DataTemplate.Triggers>
@@ -181,7 +181,7 @@
                         Height="24"
                         Command="{Binding AddValueCommand}"
                         Style="{StaticResource IconButton}">
-                        <fonts:Icon Text="{x:Static fonts:IconFont.Plus}" />
+                        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Plus}" />
                     </Button>
                 </Grid>
                 <DataTemplate.Triggers>
@@ -237,7 +237,7 @@
                         Command="{Binding RemoveCommand}"
                         Style="{StaticResource IconButton}"
                         ToolTip="Remove">
-                        <fonts:Icon Text="{x:Static fonts:IconFont.Trash}" />
+                        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Trash2}" />
                     </Button>
                 </Grid>
                 <DataTemplate.Triggers>

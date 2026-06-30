@@ -9,7 +9,7 @@
     xmlns:fonts="clr-namespace:Joufflu.Assets.Fonts;assembly=Joufflu"
     x:Name="ContainerElement">
     <StackPanel DataContext="{Binding ElementName=ContainerElement}" Orientation="Horizontal">
-        <fonts:Icon Text="{Binding Icon}" ToolTip="{Binding Type}" />
+        <fonts:FontIcon Text="{Binding Icon}" ToolTip="{Binding Type}" />
         <TextBlock
             Margin="4,0,0,0"
             VerticalAlignment="Center"

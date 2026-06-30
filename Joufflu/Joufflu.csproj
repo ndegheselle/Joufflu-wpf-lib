@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <None Remove="Assets\Fonts\lucide.ttf" />
-    <None Remove="Assets\Fonts\Phosphor.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,7 +56,6 @@
 
   <ItemGroup>
     <Resource Include="Assets\Fonts\lucide.ttf" />
-    <Resource Include="Assets\Fonts\Phosphor.ttf" />
   </ItemGroup>
 
 </Project>

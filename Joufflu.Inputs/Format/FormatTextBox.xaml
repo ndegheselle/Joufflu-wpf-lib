@@ -35,7 +35,7 @@
                             <!--  Actions buttons  -->
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
                                 <Button x:Name="PART_ClearButton" Style="{StaticResource IconButtonSmall}">
-                                    <fonts:Icon FontSize="10" Text="{x:Static fonts:IconFont.X}" />
+                                    <fonts:FontIcon FontSize="10" Text="{x:Static fonts:LucideFontIcons.x}" />
                                 </Button>
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -48,7 +48,7 @@
                                         Padding="6,0"
                                         Focusable="False"
                                         Style="{StaticResource IconButtonSmall}">
-                                        <fonts:Icon FontSize="8" Text="{x:Static fonts:IconFont.CaretUp}" />
+                                        <fonts:FontIcon FontSize="8" Text="{x:Static fonts:LucideFontIcons.ChevronUp}" />
                                     </Button>
                                     <Button
                                         x:Name="PART_DownButton"
@@ -57,7 +57,7 @@
                                         Padding="6,0"
                                         Focusable="False"
                                         Style="{StaticResource IconButtonSmall}">
-                                        <fonts:Icon FontSize="8" Text="{x:Static fonts:IconFont.CaretDown}" />
+                                        <fonts:FontIcon FontSize="8" Text="{x:Static fonts:LucideFontIcons.ChevronDown}" />
                                     </Button>
                                 </Grid>
                             </StackPanel>

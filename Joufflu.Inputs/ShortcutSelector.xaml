@@ -32,10 +32,10 @@
             BorderThickness="0,1,1,1"
             Click="Clear_Click"
             Visibility="{Binding Shortcut.Count, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource UniversalVisibilityConverter}}">
-            <fonts:Icon Text="{x:Static fonts:IconFont.X}" />
+            <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.x}" />
         </Button>
         <Button Grid.Column="2" Click="Edit_Click">
-            <fonts:Icon Text="{x:Static fonts:IconFont.PencilSimple}" />
+            <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Pencil}" />
         </Button>
 
         <TextBlock

@@ -35,13 +35,13 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
-                                <fonts:Icon FontSize="10" Text="{x:Static fonts:IconFont.X}" />
+                                <fonts:FontIcon FontSize="10" Text="{x:Static fonts:LucideFontIcons.x}" />
                             </Button>
                             <Button
                                 VerticalAlignment="Center"
                                 Command="{Binding SelectCommand}"
                                 Style="{StaticResource IconButtonSmall}">
-                                <fonts:Icon Text="{x:Static fonts:IconFont.File}" />
+                                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.File}" />
                             </Button>
                         </StackPanel>
                     </Grid>

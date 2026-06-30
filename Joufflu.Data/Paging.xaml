@@ -60,10 +60,10 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
-                                <fonts:Icon Text="{x:Static fonts:IconFont.SkipBack}" FontSize="10" />
+                                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.SkipBack}" FontSize="10" />
                             </Button>
                             <Button Command="{Binding PreviousCommand}" Margin="1,0,1,0">
-                                <fonts:Icon Text="{x:Static fonts:IconFont.CaretLeft}" FontSize="10" />
+                                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.ChevronLeft}" FontSize="10" />
                             </Button>
 
                             <TextBox
@@ -92,7 +92,7 @@
                             </TextBlock>
 
                             <Button Command="{Binding NextCommand}" Margin="6,0,0,0">
-                                <fonts:Icon Text="{x:Static fonts:IconFont.CaretRight}" FontSize="10" />
+                                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.ChevronRight}" FontSize="10" />
                             </Button>
                             <Button Command="{Binding LastCommand}" Margin="1,0,0,0">
                                 <Button.Style>
@@ -104,7 +104,7 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
-                                <fonts:Icon Text="{x:Static fonts:IconFont.SkipForward}" FontSize="10" />
+                                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.SkipForward}" FontSize="10" />
                             </Button>
                         </StackPanel>
                     </Grid>

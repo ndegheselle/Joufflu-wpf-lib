@@ -87,7 +87,7 @@
                         BorderThickness="0"
                         ToolTip="Change type">
                         <inputs:Dropdown.Header>
-                            <fonts:Icon Text="{x:Static fonts:IconFont.Pen}" />
+                            <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Pencil}" />
                         </inputs:Dropdown.Header>
                         <StackPanel Width="80">
                             <Button
@@ -95,7 +95,7 @@
                                 CommandParameter="{x:Static schema:EnumDataType.String}"
                                 Style="{StaticResource ItemButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fonts:Icon Text="{x:Static fonts:IconFont.Quotes}" />
+                                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Quote}" />
                                     <TextBlock Margin="4,0,0,0">value</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -104,7 +104,7 @@
                                 CommandParameter="{x:Static schema:EnumDataType.Array}"
                                 Style="{StaticResource ItemButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fonts:Icon Text="{x:Static fonts:IconFont.BracketsSquare}" />
+                                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Brackets}" />
                                     <TextBlock Margin="4,0,0,0">array</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -113,7 +113,7 @@
                                 CommandParameter="{x:Static schema:EnumDataType.Object}"
                                 Style="{StaticResource ItemButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fonts:Icon Text="{x:Static fonts:IconFont.BracketsCurly}" />
+                                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Braces}" />
                                     <TextBlock Margin="4,0,0,0">object</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -155,7 +155,7 @@
                         BorderThickness="0"
                         ToolTip="Add property">
                         <inputs:Dropdown.Header>
-                            <fonts:Icon Text="{x:Static fonts:IconFont.Plus}" />
+                            <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Plus}" />
                         </inputs:Dropdown.Header>
                         <StackPanel Width="80">
                             <Button
@@ -163,7 +163,7 @@
                                 CommandParameter="{x:Static schema:EnumDataType.String}"
                                 Style="{StaticResource ItemButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fonts:Icon Text="{x:Static fonts:IconFont.Quotes}" />
+                                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Quote}" />
                                     <TextBlock Margin="4,0,0,0">value</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -172,7 +172,7 @@
                                 CommandParameter="{x:Static schema:EnumDataType.Array}"
                                 Style="{StaticResource ItemButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fonts:Icon Text="{x:Static fonts:IconFont.BracketsSquare}" />
+                                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Brackets}" />
                                     <TextBlock Margin="4,0,0,0">array</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -181,7 +181,7 @@
                                 CommandParameter="{x:Static schema:EnumDataType.Object}"
                                 Style="{StaticResource ItemButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fonts:Icon Text="{x:Static fonts:IconFont.BracketsCurly}" />
+                                    <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Braces}" />
                                     <TextBlock Margin="4,0,0,0">object</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -229,7 +229,7 @@
                                 Click="EditIdentifierClick"
                                 Style="{StaticResource IconButtonSmall}"
                                 ToolTip="Edit">
-                                <fonts:Icon Text="{x:Static fonts:IconFont.Pen}" />
+                                <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Pencil}" />
                             </Button>
                         </Grid>
                     </components:Separators>
@@ -244,7 +244,7 @@
                         Command="{Binding RemoveCommand}"
                         Style="{StaticResource IconButton}"
                         ToolTip="Remove">
-                        <fonts:Icon Text="{x:Static fonts:IconFont.Trash}" />
+                        <fonts:FontIcon Text="{x:Static fonts:LucideFontIcons.Trash2}" />
                     </Button>
                 </Grid>
                 <DataTemplate.Triggers>
