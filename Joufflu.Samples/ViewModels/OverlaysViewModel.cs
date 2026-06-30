@@ -1,4 +1,5 @@
-using Joufflu.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Joufflu.Navigation;
 using System.Windows.Input;
 
@@ -23,8 +24,8 @@ public class OverlaysViewModel : ObservableObject
         _toasts = toasts;
 
         OpenSimpleCommand = new RelayCommand(OpenSimple);
-        OpenConfirmCommand = new RelayCommand(OpenConfirm);
-        OpenFormCommand = new RelayCommand(OpenForm);
+        OpenConfirmCommand = new AsyncRelayCommand(OpenConfirmAsync);
+        OpenFormCommand = new AsyncRelayCommand(OpenFormAsync);
         OpenStackedCommand = new RelayCommand(OpenStacked);
     }
 
@@ -34,7 +35,7 @@ public class OverlaysViewModel : ObservableObject
         _overlays.Show(content, new OverlayOptions { Title = "Simple overlay" });
     }
 
-    private async void OpenConfirm()
+    private async Task OpenConfirmAsync()
     {
         var content = new ConfirmViewModel("Delete the selected item? This action cannot be undone.");
         var options = new OverlayOptions { Title = "Please confirm", CloseOnClickAway = false };
@@ -48,7 +49,7 @@ public class OverlaysViewModel : ObservableObject
             _toasts.Info("Cancelled.");
     }
 
-    private async void OpenForm()
+    private async Task OpenFormAsync()
     {
         var form = new SampleFormViewModel();
         var options = new OverlayOptions { Title = "Edit profile", CloseOnClickAway = false };

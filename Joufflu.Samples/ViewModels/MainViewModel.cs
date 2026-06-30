@@ -1,5 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using Joufflu.Assets.Fonts;
-using Joufflu.Mvvm;
 using Joufflu.Navigation;
 using System.Collections.ObjectModel;
 

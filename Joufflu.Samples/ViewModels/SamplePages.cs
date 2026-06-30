@@ -1,4 +1,4 @@
-using Joufflu.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
 namespace Joufflu.Samples.ViewModels;

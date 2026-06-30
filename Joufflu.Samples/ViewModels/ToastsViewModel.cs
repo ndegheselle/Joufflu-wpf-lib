@@ -1,4 +1,5 @@
-using Joufflu.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Joufflu.Navigation;
 using System.Windows.Input;
 
