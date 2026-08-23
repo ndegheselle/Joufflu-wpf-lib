@@ -134,7 +134,7 @@ namespace Joufflu.Inputs.Controls
             "VerticalOffset",
             typeof(double),
             typeof(Dropdown),
-            new FrameworkPropertyMetadata(0d));
+            new FrameworkPropertyMetadata(2d));
 
         public static double GetVerticalOffset(DependencyObject element)
         {
@@ -254,7 +254,8 @@ namespace Joufflu.Inputs.Controls
                 Child = host,
                 PlacementTarget = button,
                 Placement = PlacementMode.Custom,
-                StaysOpen = false
+                StaysOpen = false,
+                AllowsTransparency = true
             };
             popup.CustomPopupPlacementCallback = (popupSize, targetSize, offset)
                 => PlacePopup(button, popupSize, targetSize, offset);
