@@ -1,3 +1,7 @@
+# Version 0.6.5
+
+- Let the header of a `TreeViewItem` fill the width of the row it is highlighted on, so what is seen as the item is what answers to the mouse — a drag from a `DragSource` in the item template included. Its height follows `VerticalContentAlignment`, still centered by default : a header covering the row entirely sets it to `Stretch` and centers its own content
+
 # Version 0.6.3
 
 - Pass a `DropData` to `DropTarget.Command` rather than the bare `IDataObject` : it is an `IDataObject` of the dragged data, so the commands taking one keep working, and it adds where the pointer is (`Position`) on the element the drop landed on (`Target`), for the targets placing what they receive
