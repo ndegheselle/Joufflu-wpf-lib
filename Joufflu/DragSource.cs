@@ -15,6 +15,11 @@ namespace Joufflu;
 /// duration of the drag, which is a blocking call : nothing else happens on the element until the
 /// drop lands or the drag is cancelled.
 /// </para>
+/// <para>
+/// A wrapped data is offered under every type it is : its exact type, but also the base classes and
+/// the interfaces of it, so a target can ask for the type it handles without having to know the
+/// exact kind it is given.
+/// </para>
 /// </summary>
 public static class DragSource
 {
@@ -99,6 +104,31 @@ public static class DragSource
         }
     }
 
+    /// <summary>
+    /// The data as the drop targets get it : given as is when it already is an
+    /// <see cref="IDataObject"/>, wrapped otherwise.
+    /// <para>
+    /// A <see cref="DataObject"/> only holds what it is given under its exact type, which a target
+    /// would have to know to ask for it : it is also stored under the base classes and the
+    /// interfaces of that type, so asking for the type the target handles is enough.
+    /// </para>
+    /// </summary>
+    private static IDataObject Wrap(object data)
+    {
+        if (data is IDataObject dataObject)
+            return dataObject;
+
+        // Holds the exact type, plus the conversions WPF knows of it (a string as text...).
+        var wrapper = new DataObject(data);
+
+        for (Type? type = data.GetType().BaseType; type != null && type != typeof(object); type = type.BaseType)
+            wrapper.SetData(type, data);
+        foreach (Type contract in data.GetType().GetInterfaces())
+            wrapper.SetData(contract, data);
+
+        return wrapper;
+    }
+
     /// <summary>Holds the mouse handlers of a single element, and its armed drag origin.</summary>
     private sealed class DragWatcher
     {
@@ -157,10 +187,7 @@ public static class DragSource
             {
                 // Blocks until the drop lands or the drag is cancelled ; the mouse events of the
                 // element are the system's until then.
-                DragDrop.DoDragDrop(
-                    _element,
-                    data as IDataObject ?? new DataObject(data),
-                    GetAllowedEffects(_element));
+                DragDrop.DoDragDrop(_element, Wrap(data), GetAllowedEffects(_element));
             }
             finally
             {

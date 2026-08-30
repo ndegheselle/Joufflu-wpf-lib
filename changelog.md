@@ -1,3 +1,8 @@
+# Version 0.6.3
+
+- Pass a `DropData` to `DropTarget.Command` rather than the bare `IDataObject` : it is an `IDataObject` of the dragged data, so the commands taking one keep working, and it adds where the pointer is (`Position`) on the element the drop landed on (`Target`), for the targets placing what they receive
+- Offer the data wrapped by `DragSource.Data` under the base classes and the interfaces of its type too, so a target can ask for what the data is instead of having to know the exact kind it is given
+
 # Version 0.5.1
 
 - Add a standard confirm overlay, `IOverlayService.Confirm`, with an `EnumConfirmationType` colouring its confirm button

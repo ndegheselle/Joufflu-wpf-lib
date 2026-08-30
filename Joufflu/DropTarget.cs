@@ -8,8 +8,8 @@ namespace Joufflu;
 /// <see cref="CommandProperty"/> to the command handling the drop.
 /// <para>
 /// <see cref="UIElement.AllowDrop"/> is set for you and the <c>DragEnter</c> / <c>DragOver</c> /
-/// <c>DragLeave</c> / <c>Drop</c> events are all handled : the dragged <see cref="IDataObject"/> is
-/// passed to <see cref="ICommand.CanExecute"/> to know whether it is accepted, the drop effect (see
+/// <c>DragLeave</c> / <c>Drop</c> events are all handled : the dragged data is passed to
+/// <see cref="ICommand.CanExecute"/> to know whether it is accepted, the drop effect (see
 /// <see cref="EffectProperty"/>) is reported to the source so the cursor shows whether the drop is
 /// allowed, and the command is executed with that same data once it lands. <c>CanExecute</c> is
 /// called on every mouse move of the drag, so keep it cheap and side effect free.
@@ -18,7 +18,8 @@ namespace Joufflu;
 public static class DropTarget
 {
     /// <summary>
-    /// Command handling the drop, with the dropped <see cref="IDataObject"/> as parameter. Its
+    /// Command handling the drop, with a <see cref="DropData"/> as parameter : the dragged data,
+    /// which it is an <see cref="IDataObject"/> of, and where the pointer is on the element. Its
     /// <see cref="ICommand.CanExecute"/> is what decides which data the element accepts : data it
     /// refuses can't be dropped, and doesn't light <see cref="IsDragOverProperty"/> up.
     /// </summary>
@@ -138,7 +139,7 @@ public static class DropTarget
             // Only the effects the source allows can be reported back : asking for a copy of data
             // that may only be moved would show a cursor the drop can't honor.
             DragDropEffects effect = GetEffect(_element) & e.AllowedEffects;
-            bool isAccepted = effect != DragDropEffects.None && Accepts(e.Data);
+            bool isAccepted = effect != DragDropEffects.None && Accepts(GetDropData(e));
 
             SetIsDragOver(_element, isAccepted);
             e.Effects = isAccepted ? effect : DragDropEffects.None;
@@ -160,13 +161,17 @@ public static class DropTarget
             _enterCount = 0;
             SetIsDragOver(_element, false);
 
-            if (!Accepts(e.Data))
+            DropData data = GetDropData(e);
+            if (!Accepts(data))
                 return;
 
-            GetCommand(_element)?.Execute(e.Data);
+            GetCommand(_element)?.Execute(data);
             e.Handled = true;
         }
 
-        private bool Accepts(IDataObject data) => GetCommand(_element)?.CanExecute(data) ?? false;
+        /// <summary>What the command is given : the dragged data, and where the drag is on the element.</summary>
+        private DropData GetDropData(DragEventArgs e) => new(e.Data, _element, e.GetPosition(_element));
+
+        private bool Accepts(DropData data) => GetCommand(_element)?.CanExecute(data) ?? false;
     }
 }

@@ -42,6 +42,31 @@ private static void DropFiles(IDataObject? data) { ... }
 > `CanExecute` is called on every mouse move of the drag, so keep it cheap and side
 > effect free — look at the paths, not at the files.
 
+## Where the drop landed
+
+The parameter is a `DropData`: the dragged data — which it is an `IDataObject` of, so a
+command only interested in what was dropped keeps taking one and reads it as above — and
+where the pointer is on the target, for the drops that land *somewhere* rather than just on
+something: a canvas placing what it receives under the cursor, a list inserting it at an
+index.
+
+```csharp
+// Position is relative to Target, the element holding DropTarget.Command
+private void DropNode(IDataObject? data)
+{
+    if (data is not DropData drop)
+        return;
+
+    Point onCanvas = drop.Target.TranslatePoint(drop.Position, Canvas);
+    ...
+}
+```
+
+{: .note }
+> `Position` is where the drop landed for the command itself, and where the pointer is for
+> `CanExecute`, which is called all along the drag: a target can accept a drag over one of
+> its areas and refuse it over another.
+
 ## DropTarget.IsDragOver
 
 `IsDragOver` is `true` while **accepted** data hovers the element, which is all a
@@ -87,7 +112,8 @@ threshold, so clicks keep working — a draggable button is still clickable.
 
 The data is given to the targets as is when it already is an `IDataObject`, and
 wrapped in a `DataObject` otherwise: a `string` arrives as text, a view model under
-its own type.
+its own type — and under every base class and interface of it, so a target can ask for
+what the data **is** instead of having to know the exact kind it is given.
 
 ```xml
 <!-- The mouse events are handled by the behavior: the drag starts past the system threshold -->
@@ -100,6 +126,9 @@ its own type.
 ```csharp
 // The target reads what the source carried, wrapped in a DataObject
 private static string? GetTag(IDataObject? data) => data?.GetData(DataFormats.UnicodeText) as string;
+
+// Whatever kind of node was dragged, the target only asks for the base it can handle
+private static BaseNode? GetNode(IDataObject? data) => data?.GetData(typeof(BaseNode)) as BaseNode;
 ```
 
 ## DragSource.AllowedEffects
