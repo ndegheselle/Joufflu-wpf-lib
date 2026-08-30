@@ -119,7 +119,7 @@
                 <ControlTemplate TargetType="{x:Type local:ColorPicker}">
                     <Grid
                         x:Name="Root"
-                        joufflu:Spacing.Gap="4"
+                        joufflu:Spacing.Gap="2"
                         DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:ColorPicker}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
