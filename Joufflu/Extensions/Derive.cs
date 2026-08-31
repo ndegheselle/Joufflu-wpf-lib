@@ -4,8 +4,8 @@ using System.Windows.Controls;
 namespace Joufflu.Extensions;
 
 /// <summary>
-/// Builds a border thickness, a margin or a <see cref="CornerRadius"/> from a single scalar resource,
-/// scaled by a per side or per corner factor.
+/// Builds a border thickness, a margin, a padding or a <see cref="CornerRadius"/> from a single scalar
+/// resource, scaled by a per side or per corner factor.
 /// <para>
 /// A <c>&lt;Thickness&gt;</c> declared in a <see cref="ResourceDictionary"/> is baked at parse time:
 /// its <c>Left</c>/<c>Top</c>/<c>Right</c>/<c>Bottom</c> are plain CLR properties, so they can only be
@@ -232,6 +232,77 @@ public static class Derive
         Thickness value = Scale(ToThickness(source, "Margin"), GetMarginFactor(element));
         element.SetCurrentValue(FrameworkElement.MarginProperty, value);
     }
+
+    #endregion
+
+    #region Padding
+
+    /// <summary>
+    /// Resource key of the scalar (a <see cref="double"/>) or <see cref="Thickness"/> the padding is
+    /// derived from.
+    /// </summary>
+    public static readonly DependencyProperty PaddingProperty = DependencyProperty.RegisterAttached(
+        "Padding",
+        typeof(object),
+        typeof(Derive),
+        new PropertyMetadata(null, OnPaddingKeyChanged));
+
+    /// <summary>
+    /// Per side multiplier applied to the derived padding. Defaults to <c>1,1,1,1</c>.
+    /// </summary>
+    public static readonly DependencyProperty PaddingFactorProperty = DependencyProperty.RegisterAttached(
+        "PaddingFactor",
+        typeof(Thickness),
+        typeof(Derive),
+        new PropertyMetadata(FullThickness, OnPaddingFactorChanged));
+
+    /// <summary>
+    /// Holds the live value of the resource pointed at by <see cref="PaddingProperty"/>.
+    /// </summary>
+    private static readonly DependencyProperty PaddingSourceProperty = DependencyProperty.RegisterAttached(
+        "PaddingSource",
+        typeof(object),
+        typeof(Derive),
+        new PropertyMetadata(null, OnPaddingFactorChanged));
+
+    public static object? GetPadding(DependencyObject element) => element.GetValue(PaddingProperty);
+
+    public static void SetPadding(DependencyObject element, object? value) => element.SetValue(PaddingProperty, value);
+
+    public static Thickness GetPaddingFactor(DependencyObject element)
+        => (Thickness)element.GetValue(PaddingFactorProperty);
+
+    public static void SetPaddingFactor(DependencyObject element, Thickness value)
+        => element.SetValue(PaddingFactorProperty, value);
+
+    private static void OnPaddingKeyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        => Track(d, PaddingSourceProperty, e.NewValue);
+
+    private static void OnPaddingFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not FrameworkElement element)
+            return;
+
+        object? source = element.GetValue(PaddingSourceProperty);
+        if (source == null)
+            return;
+
+        Thickness value = Scale(ToThickness(source, "Padding"), GetPaddingFactor(element));
+        element.SetCurrentValue(ResolvePadding(element), value);
+    }
+
+    /// <summary>
+    /// <see cref="Border"/>, <see cref="Control"/> and <see cref="TextBlock"/> each declare their own
+    /// Padding property.
+    /// </summary>
+    private static DependencyProperty ResolvePadding(FrameworkElement element) => element switch
+    {
+        Border => Border.PaddingProperty,
+        Control => Control.PaddingProperty,
+        TextBlock => TextBlock.PaddingProperty,
+        _ => throw new InvalidOperationException(
+            $"Derive.Padding is only supported on Border, Control and TextBlock, not on {element.GetType().Name}.")
+    };
 
     #endregion
 

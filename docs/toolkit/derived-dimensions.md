@@ -18,15 +18,15 @@ from:
            Right="{StaticResource {x:Static joufflu:Dimensions.Thickness}}" />
 ```
 
-`Derive.BorderThickness`, `Derive.CornerRadius` and `Derive.Margin` build the
-value on the element instead, from a real `DynamicResource`. A scalar edited at
-runtime — by the [theme customizer](customize-theme.html), for instance — flows
-straight through, and no derived resource key has to be declared or re-pushed by
-hand.
+`Derive.BorderThickness`, `Derive.CornerRadius`, `Derive.Margin` and
+`Derive.Padding` build the value on the element instead, from a real
+`DynamicResource`. A scalar edited at runtime — by the
+[theme customizer](customize-theme.html), for instance — flows straight through,
+and no derived resource key has to be declared or re-pushed by hand.
 
 ## Factors
 
-Each of the three properties has a matching factor, a `Thickness` (or a
+Each of the four properties has a matching factor, a `Thickness` (or a
 `CornerRadius`) whose components multiply the derived value side by side:
 
 | Factor component | Result |
@@ -83,17 +83,39 @@ Same shape again, on any `FrameworkElement`, with `Derive.MarginFactor`.
         extensions:Derive.MarginFactor="1,0,1,1" />
 ```
 
+## Derive.Padding
+
+Same shape once more, with `Derive.PaddingFactor`. Beyond dropping a side, the
+factor is what lets a control reuse a shared token at another ratio rather than
+fork it — the text inputs take the control padding at half its horizontal, which
+is what `TextBox`, `PasswordBox` and `FormatTextBox` do:
+
+```xml
+<Setter Property="extensions:Derive.Padding" Value="{x:Static joufflu:Dimensions.ControlPaddingMd}" />
+<Setter Property="extensions:Derive.PaddingFactor" Value="0.5,1,0.5,1" />
+```
+
+Only the source key then changes per size variant, the factor staying put:
+
+```xml
+<Trigger Property="joufflu:Sizing.Size" Value="sm">
+    <Setter Property="extensions:Derive.Padding" Value="{x:Static joufflu:Dimensions.ControlPaddingSm}" />
+</Trigger>
+```
+
 ## Notes
 
 - The source resource may be a `double` (the usual case, spread over every side
   or corner before scaling) or an already built `Thickness` / `CornerRadius`,
   whose own sides are then scaled.
 - `Derive.BorderThickness` applies to `Border` and to any `Control`;
-  `Derive.CornerRadius` applies to `Border`; `Derive.Margin` applies to any
-  `FrameworkElement`. Anything else throws.
-- The derived value is written with `SetCurrentValue`, so a style trigger or an
-  animation targeting `BorderThickness`, `CornerRadius` or `Margin` still takes
-  over.
+  `Derive.CornerRadius` applies to `Border`; `Derive.Padding` to `Border`,
+  `Control` and `TextBlock`; `Derive.Margin` to any `FrameworkElement`. Anything
+  else throws.
+- The derived value is written with `SetCurrentValue`, which outranks a style
+  setter : a style deriving a value should not also set the property it feeds,
+  and the `Style.Triggers` meant to change it have to move to the `Derive`
+  property instead. An animation or a template trigger still takes over.
 
 Snippets use these XML namespaces:
 

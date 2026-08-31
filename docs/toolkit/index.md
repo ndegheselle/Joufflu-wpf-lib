@@ -11,7 +11,7 @@ themselves.
 
 - **Sizing** — the `ControlProperties.Size` and `IsSquare` attached properties.
 - **Spacing** — the `Spacing.Gap` attached property for gaps between children.
-- **Derived dimensions** — the `Derive.BorderThickness`, `Derive.CornerRadius` and `Derive.Margin` attached properties, with their factors scaling the value side by side, for thicknesses, radii and margins that follow the theme live.
+- **Derived dimensions** — the `Derive.BorderThickness`, `Derive.CornerRadius`, `Derive.Margin` and `Derive.Padding` attached properties, with their factors scaling the value side by side, for thicknesses, radii, margins and paddings that follow the theme live.
 - **Tooltip** — the `Tooltip.Content` and `Tooltip.Placement` attached properties for themed tooltips on any element.
 - **Drag and drop** — the `DropTarget.Command`, `IsDragOver` and `Effect` attached properties for turning any element into a drop target, with the `DropData` telling what was dropped and where, and `DragSource.Data`, `AllowedEffects` and `IsDragging` for turning any element into a drag source.
 - **Theme** — `ThemeManager` for System/Light/Dark plus registering custom themes, and how to bind a theme switcher UI to it.
