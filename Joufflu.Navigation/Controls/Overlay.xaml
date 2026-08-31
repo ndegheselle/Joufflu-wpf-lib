@@ -42,9 +42,6 @@
 
             <Border
                 x:Name="Panel"
-                MinWidth="320"
-                MaxWidth="640"
-                MaxHeight="600"
                 Margin="24"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -83,7 +80,7 @@
 
                     <ScrollViewer
                         extensions:Derive.Margin="{x:Static joufflu:Dimensions.Spacing}"
-                        extensions:Derive.MarginSides="Left,Right,Bottom"
+                        extensions:Derive.MarginFactor="1,0,1,1"
                         Grid.Row="1"
                         HorizontalScrollBarVisibility="Disabled"
                         VerticalScrollBarVisibility="Auto">
@@ -105,8 +102,6 @@
                 <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Options.FullScreen}" Value="True">
-                <Setter TargetName="Panel" Property="MaxWidth" Value="Infinity" />
-                <Setter TargetName="Panel" Property="MaxHeight" Value="Infinity" />
                 <Setter TargetName="Panel" Property="Margin" Value="0" />
                 <Setter TargetName="Panel" Property="HorizontalAlignment" Value="Stretch" />
                 <Setter TargetName="Panel" Property="VerticalAlignment" Value="Stretch" />

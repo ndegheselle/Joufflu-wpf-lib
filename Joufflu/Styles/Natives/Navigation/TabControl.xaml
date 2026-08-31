@@ -20,10 +20,10 @@
                         <!--  Open at the bottom, where the tab meets the selected page.  -->
                         <Border
                             x:Name="Border"
-                            extensions:Derive.BorderSides="Left,Top,Right"
+                            extensions:Derive.BorderThicknessFactor="1,1,1,0"
                             extensions:Derive.BorderThickness="{x:Static joufflu:Dimensions.Thickness}"
                             extensions:Derive.CornerRadius="{x:Static joufflu:Dimensions.Radius}"
-                            extensions:Derive.Corners="Top"
+                            extensions:Derive.CornerRadiusFactor="1,1,0,0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter
@@ -90,7 +90,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             extensions:Derive.CornerRadius="{x:Static joufflu:Dimensions.Radius}"
-                            extensions:Derive.Corners="TopRight,BottomRight,BottomLeft"
+                            extensions:Derive.CornerRadiusFactor="0,1,1,1"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             KeyboardNavigation.DirectionalNavigation="Contained"
                             KeyboardNavigation.TabIndex="2"

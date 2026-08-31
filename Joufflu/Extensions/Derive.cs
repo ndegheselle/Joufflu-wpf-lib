@@ -1,45 +1,11 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Joufflu.Extensions;
 
 /// <summary>
-/// Sides of a <see cref="Thickness"/> kept by <see cref="Derive.BorderSidesProperty"/>.
-/// </summary>
-[Flags]
-public enum ThicknessSides
-{
-    None = 0,
-    Left = 1,
-    Top = 2,
-    Right = 4,
-    Bottom = 8,
-    Horizontal = Left | Right,
-    Vertical = Top | Bottom,
-    All = Left | Top | Right | Bottom
-}
-
-/// <summary>
-/// Corners of a <see cref="CornerRadius"/> kept by <see cref="Derive.CornersProperty"/>.
-/// </summary>
-[Flags]
-public enum Corners
-{
-    None = 0,
-    TopLeft = 1,
-    TopRight = 2,
-    BottomRight = 4,
-    BottomLeft = 8,
-    Top = TopLeft | TopRight,
-    Bottom = BottomLeft | BottomRight,
-    Left = TopLeft | BottomLeft,
-    Right = TopRight | BottomRight,
-    All = TopLeft | TopRight | BottomRight | BottomLeft
-}
-
-/// <summary>
 /// Builds a border thickness, a margin or a <see cref="CornerRadius"/> from a single scalar resource,
-/// keeping only the requested sides or corners.
+/// scaled by a per side or per corner factor.
 /// <para>
 /// A <c>&lt;Thickness&gt;</c> declared in a <see cref="ResourceDictionary"/> is baked at parse time:
 /// its <c>Left</c>/<c>Top</c>/<c>Right</c>/<c>Bottom</c> are plain CLR properties, so they can only be
@@ -47,19 +13,34 @@ public enum Corners
 /// a real <c>DynamicResource</c> on the element instead, so a scalar edited at runtime (by a theme
 /// customizer, for instance) flows through without any derived key having to be re-pushed by hand.
 /// </para>
+/// <para>
+/// The factor is itself a <see cref="Thickness"/> (or a <see cref="CornerRadius"/>) whose components
+/// multiply the derived value: <c>0</c> drops a side, <c>1</c> keeps it as is, and anything else scales
+/// it — <c>2</c> for a double margin, <c>0.5</c> for a half radius.
+/// </para>
 /// <example>
 /// A border rounded on its top corners only, drawn on every side but the bottom:
 /// <code>
 /// &lt;Border
 ///     extensions:Derive.BorderThickness="{x:Static joufflu:Dimensions.Thickness}"
-///     extensions:Derive.BorderSides="Left,Top,Right"
+///     extensions:Derive.BorderThicknessFactor="1,1,1,0"
 ///     extensions:Derive.CornerRadius="{x:Static joufflu:Dimensions.Radius}"
-///     extensions:Derive.Corners="Top" /&gt;
+///     extensions:Derive.CornerRadiusFactor="1,1,0,0" /&gt;
 /// </code>
 /// </example>
 /// </summary>
 public static class Derive
 {
+    /// <summary>
+    /// Neutral factor, keeping every side of the derived thickness.
+    /// </summary>
+    private static readonly Thickness FullThickness = new(1);
+
+    /// <summary>
+    /// Neutral factor, keeping every corner of the derived radius.
+    /// </summary>
+    private static readonly CornerRadius FullCornerRadius = new(1);
+
     #region BorderThickness
 
     /// <summary>
@@ -73,13 +54,13 @@ public static class Derive
         new PropertyMetadata(null, OnBorderKeyChanged));
 
     /// <summary>
-    /// Sides kept from the derived thickness. Defaults to <see cref="ThicknessSides.All"/>.
+    /// Per side multiplier applied to the derived thickness. Defaults to <c>1,1,1,1</c>.
     /// </summary>
-    public static readonly DependencyProperty BorderSidesProperty = DependencyProperty.RegisterAttached(
-        "BorderSides",
-        typeof(ThicknessSides),
+    public static readonly DependencyProperty BorderThicknessFactorProperty = DependencyProperty.RegisterAttached(
+        "BorderThicknessFactor",
+        typeof(Thickness),
         typeof(Derive),
-        new PropertyMetadata(ThicknessSides.All, OnBorderMaskChanged));
+        new PropertyMetadata(FullThickness, OnBorderFactorChanged));
 
     /// <summary>
     /// Holds the live value of the resource pointed at by <see cref="BorderThicknessProperty"/>.
@@ -88,23 +69,23 @@ public static class Derive
         "BorderSource",
         typeof(object),
         typeof(Derive),
-        new PropertyMetadata(null, OnBorderMaskChanged));
+        new PropertyMetadata(null, OnBorderFactorChanged));
 
     public static object? GetBorderThickness(DependencyObject element) => element.GetValue(BorderThicknessProperty);
 
     public static void SetBorderThickness(DependencyObject element, object? value)
         => element.SetValue(BorderThicknessProperty, value);
 
-    public static ThicknessSides GetBorderSides(DependencyObject element)
-        => (ThicknessSides)element.GetValue(BorderSidesProperty);
+    public static Thickness GetBorderThicknessFactor(DependencyObject element)
+        => (Thickness)element.GetValue(BorderThicknessFactorProperty);
 
-    public static void SetBorderSides(DependencyObject element, ThicknessSides value)
-        => element.SetValue(BorderSidesProperty, value);
+    public static void SetBorderThicknessFactor(DependencyObject element, Thickness value)
+        => element.SetValue(BorderThicknessFactorProperty, value);
 
     private static void OnBorderKeyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         => Track(d, BorderSourceProperty, e.NewValue);
 
-    private static void OnBorderMaskChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnBorderFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FrameworkElement element)
             return;
@@ -113,7 +94,7 @@ public static class Derive
         if (source == null)
             return;
 
-        Thickness value = Mask(ToThickness(source, "BorderThickness"), GetBorderSides(element));
+        Thickness value = Scale(ToThickness(source, "BorderThickness"), GetBorderThicknessFactor(element));
         element.SetCurrentValue(ResolveBorderThickness(element), value);
     }
 
@@ -143,13 +124,13 @@ public static class Derive
         new PropertyMetadata(null, OnCornerKeyChanged));
 
     /// <summary>
-    /// Corners kept from the derived radius. Defaults to <see cref="Corners.All"/>.
+    /// Per corner multiplier applied to the derived radius. Defaults to <c>1,1,1,1</c>.
     /// </summary>
-    public static readonly DependencyProperty CornersProperty = DependencyProperty.RegisterAttached(
-        "Corners",
-        typeof(Corners),
+    public static readonly DependencyProperty CornerRadiusFactorProperty = DependencyProperty.RegisterAttached(
+        "CornerRadiusFactor",
+        typeof(CornerRadius),
         typeof(Derive),
-        new PropertyMetadata(Corners.All, OnCornerMaskChanged));
+        new PropertyMetadata(FullCornerRadius, OnCornerFactorChanged));
 
     /// <summary>
     /// Holds the live value of the resource pointed at by <see cref="CornerRadiusProperty"/>.
@@ -158,21 +139,23 @@ public static class Derive
         "CornerSource",
         typeof(object),
         typeof(Derive),
-        new PropertyMetadata(null, OnCornerMaskChanged));
+        new PropertyMetadata(null, OnCornerFactorChanged));
 
     public static object? GetCornerRadius(DependencyObject element) => element.GetValue(CornerRadiusProperty);
 
     public static void SetCornerRadius(DependencyObject element, object? value)
         => element.SetValue(CornerRadiusProperty, value);
 
-    public static Corners GetCorners(DependencyObject element) => (Corners)element.GetValue(CornersProperty);
+    public static CornerRadius GetCornerRadiusFactor(DependencyObject element)
+        => (CornerRadius)element.GetValue(CornerRadiusFactorProperty);
 
-    public static void SetCorners(DependencyObject element, Corners value) => element.SetValue(CornersProperty, value);
+    public static void SetCornerRadiusFactor(DependencyObject element, CornerRadius value)
+        => element.SetValue(CornerRadiusFactorProperty, value);
 
     private static void OnCornerKeyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         => Track(d, CornerSourceProperty, e.NewValue);
 
-    private static void OnCornerMaskChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnCornerFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FrameworkElement element)
             return;
@@ -181,7 +164,7 @@ public static class Derive
         if (source == null)
             return;
 
-        CornerRadius value = Mask(ToCornerRadius(source), GetCorners(element));
+        CornerRadius value = Scale(ToCornerRadius(source), GetCornerRadiusFactor(element));
         element.SetCurrentValue(ResolveCornerRadius(element), value);
     }
 
@@ -207,13 +190,13 @@ public static class Derive
         new PropertyMetadata(null, OnMarginKeyChanged));
 
     /// <summary>
-    /// Sides kept from the derived margin. Defaults to <see cref="ThicknessSides.All"/>.
+    /// Per side multiplier applied to the derived margin. Defaults to <c>1,1,1,1</c>.
     /// </summary>
-    public static readonly DependencyProperty MarginSidesProperty = DependencyProperty.RegisterAttached(
-        "MarginSides",
-        typeof(ThicknessSides),
+    public static readonly DependencyProperty MarginFactorProperty = DependencyProperty.RegisterAttached(
+        "MarginFactor",
+        typeof(Thickness),
         typeof(Derive),
-        new PropertyMetadata(ThicknessSides.All, OnMarginMaskChanged));
+        new PropertyMetadata(FullThickness, OnMarginFactorChanged));
 
     /// <summary>
     /// Holds the live value of the resource pointed at by <see cref="MarginProperty"/>.
@@ -222,22 +205,22 @@ public static class Derive
         "MarginSource",
         typeof(object),
         typeof(Derive),
-        new PropertyMetadata(null, OnMarginMaskChanged));
+        new PropertyMetadata(null, OnMarginFactorChanged));
 
     public static object? GetMargin(DependencyObject element) => element.GetValue(MarginProperty);
 
     public static void SetMargin(DependencyObject element, object? value) => element.SetValue(MarginProperty, value);
 
-    public static ThicknessSides GetMarginSides(DependencyObject element)
-        => (ThicknessSides)element.GetValue(MarginSidesProperty);
+    public static Thickness GetMarginFactor(DependencyObject element)
+        => (Thickness)element.GetValue(MarginFactorProperty);
 
-    public static void SetMarginSides(DependencyObject element, ThicknessSides value)
-        => element.SetValue(MarginSidesProperty, value);
+    public static void SetMarginFactor(DependencyObject element, Thickness value)
+        => element.SetValue(MarginFactorProperty, value);
 
     private static void OnMarginKeyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         => Track(d, MarginSourceProperty, e.NewValue);
 
-    private static void OnMarginMaskChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnMarginFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FrameworkElement element)
             return;
@@ -246,7 +229,7 @@ public static class Derive
         if (source == null)
             return;
 
-        Thickness value = Mask(ToThickness(source, "Margin"), GetMarginSides(element));
+        Thickness value = Scale(ToThickness(source, "Margin"), GetMarginFactor(element));
         element.SetCurrentValue(FrameworkElement.MarginProperty, value);
     }
 
@@ -285,17 +268,17 @@ public static class Derive
             $"Derive.CornerRadius expects a CornerRadius or a numeric resource, got {source.GetType().Name}.")
     };
 
-    private static Thickness Mask(Thickness value, ThicknessSides sides) => new(
-        sides.HasFlag(ThicknessSides.Left) ? value.Left : 0,
-        sides.HasFlag(ThicknessSides.Top) ? value.Top : 0,
-        sides.HasFlag(ThicknessSides.Right) ? value.Right : 0,
-        sides.HasFlag(ThicknessSides.Bottom) ? value.Bottom : 0);
+    private static Thickness Scale(Thickness value, Thickness factor) => new(
+        value.Left * factor.Left,
+        value.Top * factor.Top,
+        value.Right * factor.Right,
+        value.Bottom * factor.Bottom);
 
-    private static CornerRadius Mask(CornerRadius value, Corners corners) => new(
-        corners.HasFlag(Corners.TopLeft) ? value.TopLeft : 0,
-        corners.HasFlag(Corners.TopRight) ? value.TopRight : 0,
-        corners.HasFlag(Corners.BottomRight) ? value.BottomRight : 0,
-        corners.HasFlag(Corners.BottomLeft) ? value.BottomLeft : 0);
+    private static CornerRadius Scale(CornerRadius value, CornerRadius factor) => new(
+        value.TopLeft * factor.TopLeft,
+        value.TopRight * factor.TopRight,
+        value.BottomRight * factor.BottomRight,
+        value.BottomLeft * factor.BottomLeft);
 
     #endregion
 }

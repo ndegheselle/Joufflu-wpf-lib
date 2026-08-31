@@ -182,7 +182,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource {x:Static joufflu:Brushes.BorderBrush}}" />
         <!--  Right edge only: the menu just separates itself from the content beside it.  -->
         <Setter Property="extensions:Derive.BorderThickness" Value="{x:Static joufflu:Dimensions.Thickness}" />
-        <Setter Property="extensions:Derive.BorderSides" Value="Right" />
+        <Setter Property="extensions:Derive.BorderThicknessFactor" Value="0,0,1,0" />
         <Setter Property="Width" Value="220" />
         <Setter Property="Template">
             <Setter.Value>

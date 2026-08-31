@@ -1,5 +1,6 @@
 # Version 0.6.5
 
+- Replace `Derive.BorderSides`, `Derive.MarginSides` and `Derive.Corners` by `Derive.BorderThicknessFactor`, `Derive.MarginFactor` and `Derive.CornerRadiusFactor` : a `Thickness` or a `CornerRadius` multiplying the derived value side by side, so `0` still drops a side and `1` keeps it, while any other value scales it — a doubled margin or a halved radius no longer needs its own dimension. Drops the `ThicknessSides` and `Corners` flags enums
 - Let the header of a `TreeViewItem` fill the width of the row it is highlighted on, so what is seen as the item is what answers to the mouse — a drag from a `DragSource` in the item template included. Its height follows `VerticalContentAlignment`, still centered by default : a header covering the row entirely sets it to `Stretch` and centers its own content
 
 # Version 0.6.3

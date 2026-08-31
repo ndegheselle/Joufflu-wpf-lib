@@ -36,7 +36,7 @@
                                 x:Name="HeaderBorder"
                                 Grid.Row="0"
                                 extensions:Derive.CornerRadius="{x:Static joufflu:Dimensions.Radius}"
-                                extensions:Derive.Corners="Top"
+                                extensions:Derive.CornerRadiusFactor="1,1,0,0"
                                 Background="{DynamicResource {x:Static joufflu:Brushes.BorderBrush}}">
                                 <ContentPresenter
                                     Margin="{TemplateBinding Padding}"
