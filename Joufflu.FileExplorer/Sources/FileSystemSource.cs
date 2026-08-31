@@ -1,12 +1,12 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Joufflu.Feedback.Controls;
-using Joufflu.FileExplorer.Data;
-using Joufflu.FileExplorer.Helpers;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Joufflu.Feedback;
+using Joufflu.FileExplorer.Data;
+using Joufflu.FileExplorer.Helpers;
 
 namespace Joufflu.FileExplorer.Sources
 {

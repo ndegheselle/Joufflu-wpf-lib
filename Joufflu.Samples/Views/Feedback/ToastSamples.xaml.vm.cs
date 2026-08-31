@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Joufflu.Feedback;
 using Joufflu.Feedback.Controls;
 
 namespace Joufflu.Samples.Views.Feedback;
