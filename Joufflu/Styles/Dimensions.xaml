@@ -21,7 +21,7 @@
         TopRight="{StaticResource {x:Static joufflu:Dimensions.Radius}}" />
 
     <system:Double x:Key="{x:Static joufflu:Dimensions.Spacing}">12</system:Double>
-    <Thickness
+    <Thickness 
         x:Key="{x:Static joufflu:Dimensions.SpacingThickness}"
         Bottom="{StaticResource {x:Static joufflu:Dimensions.Spacing}}"
         Left="{StaticResource {x:Static joufflu:Dimensions.Spacing}}"

@@ -1,5 +1,7 @@
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Joufflu.Extensions;
 
@@ -235,74 +237,60 @@ public static class Derive
 
     #endregion
 
-    #region Padding
+    #region Scaled (overridable)
 
     /// <summary>
-    /// Resource key of the scalar (a <see cref="double"/>) or <see cref="Thickness"/> the padding is
-    /// derived from.
+    /// Base value (a <see cref="double"/> or a <see cref="Thickness"/>) a scaled property is derived
+    /// from. Feed it a <c>DynamicResource</c> so a scalar edited at runtime still flows through.
+    /// <para>
+    /// Unlike <see cref="MarginProperty"/> and its siblings, this pairs with the <see cref="Scaler"/>
+    /// converter inside a plain <c>Padding</c> (or <c>Margin</c>, …) setter rather than pushing the value
+    /// with <c>SetCurrentValue</c>. The derived value then lands at style setter precedence, so a consumer
+    /// local value or a more specific style still overrides it — the way a control property should behave.
+    /// </para>
     /// </summary>
-    public static readonly DependencyProperty PaddingProperty = DependencyProperty.RegisterAttached(
-        "Padding",
+    public static readonly DependencyProperty BaseProperty = DependencyProperty.RegisterAttached(
+        "Base",
         typeof(object),
         typeof(Derive),
-        new PropertyMetadata(null, OnPaddingKeyChanged));
+        new PropertyMetadata(null));
 
     /// <summary>
-    /// Per side multiplier applied to the derived padding. Defaults to <c>1,1,1,1</c>.
+    /// Per side multiplier applied to <see cref="BaseProperty"/>. Defaults to <c>1,1,1,1</c>.
     /// </summary>
-    public static readonly DependencyProperty PaddingFactorProperty = DependencyProperty.RegisterAttached(
-        "PaddingFactor",
+    public static readonly DependencyProperty FactorProperty = DependencyProperty.RegisterAttached(
+        "Factor",
         typeof(Thickness),
         typeof(Derive),
-        new PropertyMetadata(FullThickness, OnPaddingFactorChanged));
+        new PropertyMetadata(FullThickness));
+
+    public static object? GetBase(DependencyObject element) => element.GetValue(BaseProperty);
+
+    public static void SetBase(DependencyObject element, object? value) => element.SetValue(BaseProperty, value);
+
+    public static Thickness GetFactor(DependencyObject element) => (Thickness)element.GetValue(FactorProperty);
+
+    public static void SetFactor(DependencyObject element, Thickness value) => element.SetValue(FactorProperty, value);
 
     /// <summary>
-    /// Holds the live value of the resource pointed at by <see cref="PaddingProperty"/>.
+    /// Scales a base <see cref="double"/> or <see cref="Thickness"/> (value one) by a per side
+    /// <see cref="Thickness"/> factor (value two) into the final <see cref="Thickness"/>.
     /// </summary>
-    private static readonly DependencyProperty PaddingSourceProperty = DependencyProperty.RegisterAttached(
-        "PaddingSource",
-        typeof(object),
-        typeof(Derive),
-        new PropertyMetadata(null, OnPaddingFactorChanged));
+    public static readonly IMultiValueConverter Scaler = new ThicknessScaler();
 
-    public static object? GetPadding(DependencyObject element) => element.GetValue(PaddingProperty);
-
-    public static void SetPadding(DependencyObject element, object? value) => element.SetValue(PaddingProperty, value);
-
-    public static Thickness GetPaddingFactor(DependencyObject element)
-        => (Thickness)element.GetValue(PaddingFactorProperty);
-
-    public static void SetPaddingFactor(DependencyObject element, Thickness value)
-        => element.SetValue(PaddingFactorProperty, value);
-
-    private static void OnPaddingKeyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        => Track(d, PaddingSourceProperty, e.NewValue);
-
-    private static void OnPaddingFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private sealed class ThicknessScaler : IMultiValueConverter
     {
-        if (d is not FrameworkElement element)
-            return;
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values.Length < 2 || values[0] is not { } source || values[1] is not Thickness factor)
+                return DependencyProperty.UnsetValue;
 
-        object? source = element.GetValue(PaddingSourceProperty);
-        if (source == null)
-            return;
+            return Scale(ToThickness(source, "Base"), factor);
+        }
 
-        Thickness value = Scale(ToThickness(source, "Padding"), GetPaddingFactor(element));
-        element.SetCurrentValue(ResolvePadding(element), value);
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+            => throw new NotSupportedException();
     }
-
-    /// <summary>
-    /// <see cref="Border"/>, <see cref="Control"/> and <see cref="TextBlock"/> each declare their own
-    /// Padding property.
-    /// </summary>
-    private static DependencyProperty ResolvePadding(FrameworkElement element) => element switch
-    {
-        Border => Border.PaddingProperty,
-        Control => Control.PaddingProperty,
-        TextBlock => TextBlock.PaddingProperty,
-        _ => throw new InvalidOperationException(
-            $"Derive.Padding is only supported on Border, Control and TextBlock, not on {element.GetType().Name}.")
-    };
 
     #endregion
 
@@ -323,7 +311,7 @@ public static class Derive
             element.SetResourceReference(source, key);
     }
 
-    private static Thickness ToThickness(object source, string property) => source switch
+    internal static Thickness ToThickness(object source, string property) => source switch
     {
         Thickness thickness => thickness,
         IConvertible convertible => new Thickness(convertible.ToDouble(null)),
@@ -339,7 +327,7 @@ public static class Derive
             $"Derive.CornerRadius expects a CornerRadius or a numeric resource, got {source.GetType().Name}.")
     };
 
-    private static Thickness Scale(Thickness value, Thickness factor) => new(
+    internal static Thickness Scale(Thickness value, Thickness factor) => new(
         value.Left * factor.Left,
         value.Top * factor.Top,
         value.Right * factor.Right,

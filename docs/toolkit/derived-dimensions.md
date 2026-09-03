@@ -18,11 +18,12 @@ from:
            Right="{StaticResource {x:Static joufflu:Dimensions.Thickness}}" />
 ```
 
-`Derive.BorderThickness`, `Derive.CornerRadius`, `Derive.Margin` and
-`Derive.Padding` build the value on the element instead, from a real
-`DynamicResource`. A scalar edited at runtime — by the
-[theme customizer](customize-theme.html), for instance — flows straight through,
-and no derived resource key has to be declared or re-pushed by hand.
+`Derive.BorderThickness`, `Derive.CornerRadius` and `Derive.Margin` build the
+value on the element instead, from a real `DynamicResource`. A scalar edited at
+runtime — by the [theme customizer](customize-theme.html), for instance — flows
+straight through, and no derived resource key has to be declared or re-pushed by
+hand. For a property a consumer is meant to override, the `Derive.Scaler`
+converter does the same from a plain setter — see [Derive.Scaler](#derivescaler).
 
 ## Factors
 
@@ -83,25 +84,46 @@ Same shape again, on any `FrameworkElement`, with `Derive.MarginFactor`.
         extensions:Derive.MarginFactor="1,0,1,1" />
 ```
 
-## Derive.Padding
+## Derive.Scaler
 
-Same shape once more, with `Derive.PaddingFactor`. Beyond dropping a side, the
-factor is what lets a control reuse a shared token at another ratio rather than
-fork it — the text inputs take the control padding at half its horizontal, which
-is what `TextBox`, `PasswordBox` and `FormatTextBox` do:
+The three properties above push their result with `SetCurrentValue`, which
+outranks a style setter — fine for a `Border` inside a template, wrong for a
+property a consumer overrides, since their own `Padding` would lose to the
+derived one. `Derive.Scaler` derives the value the other way: it is an
+`IMultiValueConverter` fed a base (`Derive.Base`) and a factor (`Derive.Factor`)
+inside a plain setter, so the result lands at style setter precedence and a
+consumer local value — or a more specific style — still wins.
+
+Beyond dropping a side, the factor is what lets a control reuse a shared token at
+another ratio rather than fork it — the text inputs take the control padding at
+half its horizontal, which is what `TextBox`, `PasswordBox` and `FormatTextBox`
+do:
 
 ```xml
-<Setter Property="extensions:Derive.Padding" Value="{x:Static joufflu:Dimensions.ControlPaddingMd}" />
-<Setter Property="extensions:Derive.PaddingFactor" Value="0.5,1,0.5,1" />
+<Setter Property="extensions:Derive.Base" Value="{DynamicResource {x:Static joufflu:Dimensions.ControlPaddingMd}}" />
+<Setter Property="extensions:Derive.Factor" Value="0.5,1,0.5,1" />
+<Setter Property="Padding">
+    <Setter.Value>
+        <MultiBinding Converter="{x:Static extensions:Derive.Scaler}">
+            <Binding Path="(extensions:Derive.Base)" RelativeSource="{RelativeSource Self}" />
+            <Binding Path="(extensions:Derive.Factor)" RelativeSource="{RelativeSource Self}" />
+        </MultiBinding>
+    </Setter.Value>
+</Setter>
 ```
 
-Only the source key then changes per size variant, the factor staying put:
+Only the base then changes per size variant, the factor and the `Padding` setter
+staying put:
 
 ```xml
 <Trigger Property="joufflu:Sizing.Size" Value="sm">
-    <Setter Property="extensions:Derive.Padding" Value="{x:Static joufflu:Dimensions.ControlPaddingSm}" />
+    <Setter Property="extensions:Derive.Base" Value="{DynamicResource {x:Static joufflu:Dimensions.ControlPaddingSm}}" />
 </Trigger>
 ```
+
+`Derive.Base` takes the live value (through a `DynamicResource`), not the key, so
+it resolves in the element's own tree — feed it the `{DynamicResource …}`, not
+the `{x:Static …}` key the pushing properties expect.
 
 ## Notes
 
@@ -109,13 +131,15 @@ Only the source key then changes per size variant, the factor staying put:
   or corner before scaling) or an already built `Thickness` / `CornerRadius`,
   whose own sides are then scaled.
 - `Derive.BorderThickness` applies to `Border` and to any `Control`;
-  `Derive.CornerRadius` applies to `Border`; `Derive.Padding` to `Border`,
-  `Control` and `TextBlock`; `Derive.Margin` to any `FrameworkElement`. Anything
-  else throws.
-- The derived value is written with `SetCurrentValue`, which outranks a style
+  `Derive.CornerRadius` applies to `Border`; `Derive.Margin` to any
+  `FrameworkElement`. Anything else throws. `Derive.Scaler` is a converter, so it
+  targets any `Thickness` property it is bound to.
+- The pushed properties (`Derive.BorderThickness`, `Derive.CornerRadius`,
+  `Derive.Margin`) are written with `SetCurrentValue`, which outranks a style
   setter : a style deriving a value should not also set the property it feeds,
   and the `Style.Triggers` meant to change it have to move to the `Derive`
-  property instead. An animation or a template trigger still takes over.
+  property instead. An animation or a template trigger still takes over. Reach
+  for `Derive.Scaler` instead when the fed property has to stay overridable.
 
 Snippets use these XML namespaces:
 

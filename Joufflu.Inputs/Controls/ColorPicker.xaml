@@ -243,18 +243,12 @@
                                             Background="{StaticResource ColorPickerCheckerBrush}"
                                             CornerRadius="6" />
                                         <Slider
+                                            Background="{Binding AlphaBrush}"
                                             Maximum="1"
                                             Minimum="0"
                                             SmallChange="0.01"
                                             Style="{StaticResource ColorPickerBarSlider}"
-                                            Value="{Binding Alpha, Mode=TwoWay}">
-                                            <Slider.Background>
-                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                    <GradientStop Offset="0" Color="Transparent" />
-                                                    <GradientStop Offset="1" Color="{Binding OpaqueBrush.Color}" />
-                                                </LinearGradientBrush>
-                                            </Slider.Background>
-                                        </Slider>
+                                            Value="{Binding Alpha, Mode=TwoWay}" />
                                     </Grid>
 
                                     <!--  Swatch + hex + opacity readout  -->

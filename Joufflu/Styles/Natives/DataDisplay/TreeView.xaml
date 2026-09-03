@@ -140,8 +140,8 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource FindAncestor, AncestorType=TreeViewItem}}" Value="True" />
-                    <Condition Binding="{Binding Items.Count, RelativeSource={RelativeSource FindAncestor, AncestorType=TreeViewItem}}" Value="1" />
+                    <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+                    <Condition Binding="{Binding Items.Count, RelativeSource={RelativeSource TemplatedParent}}" Value="1" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
                     <Setter Property="IsExpanded" Value="True" />

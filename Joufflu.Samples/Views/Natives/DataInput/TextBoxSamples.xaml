@@ -41,8 +41,8 @@
                 <StackPanel joufflu:Spacing.Gap="4">
                     <PasswordBox Password="secret" />
                     <TextBox
-                        VerticalContentAlignment="Top"
                         Height="70"
+                        VerticalContentAlignment="Top"
                         AcceptsReturn="True"
                         Text="Multi-line&#x0a;text box"
                         TextWrapping="Wrap"
