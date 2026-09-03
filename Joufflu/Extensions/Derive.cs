@@ -1,13 +1,11 @@
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace Joufflu.Extensions;
 
 /// <summary>
-/// Builds a border thickness, a margin, a padding or a <see cref="CornerRadius"/> from a single scalar
-/// resource, scaled by a per side or per corner factor.
+/// Builds a border thickness, a margin or a <see cref="CornerRadius"/> from a single scalar resource,
+/// scaled by a per side or per corner factor.
 /// <para>
 /// A <c>&lt;Thickness&gt;</c> declared in a <see cref="ResourceDictionary"/> is baked at parse time:
 /// its <c>Left</c>/<c>Top</c>/<c>Right</c>/<c>Bottom</c> are plain CLR properties, so they can only be
@@ -237,63 +235,6 @@ public static class Derive
 
     #endregion
 
-    #region Scaled (overridable)
-
-    /// <summary>
-    /// Base value (a <see cref="double"/> or a <see cref="Thickness"/>) a scaled property is derived
-    /// from. Feed it a <c>DynamicResource</c> so a scalar edited at runtime still flows through.
-    /// <para>
-    /// Unlike <see cref="MarginProperty"/> and its siblings, this pairs with the <see cref="Scaler"/>
-    /// converter inside a plain <c>Padding</c> (or <c>Margin</c>, …) setter rather than pushing the value
-    /// with <c>SetCurrentValue</c>. The derived value then lands at style setter precedence, so a consumer
-    /// local value or a more specific style still overrides it — the way a control property should behave.
-    /// </para>
-    /// </summary>
-    public static readonly DependencyProperty BaseProperty = DependencyProperty.RegisterAttached(
-        "Base",
-        typeof(object),
-        typeof(Derive),
-        new PropertyMetadata(null));
-
-    /// <summary>
-    /// Per side multiplier applied to <see cref="BaseProperty"/>. Defaults to <c>1,1,1,1</c>.
-    /// </summary>
-    public static readonly DependencyProperty FactorProperty = DependencyProperty.RegisterAttached(
-        "Factor",
-        typeof(Thickness),
-        typeof(Derive),
-        new PropertyMetadata(FullThickness));
-
-    public static object? GetBase(DependencyObject element) => element.GetValue(BaseProperty);
-
-    public static void SetBase(DependencyObject element, object? value) => element.SetValue(BaseProperty, value);
-
-    public static Thickness GetFactor(DependencyObject element) => (Thickness)element.GetValue(FactorProperty);
-
-    public static void SetFactor(DependencyObject element, Thickness value) => element.SetValue(FactorProperty, value);
-
-    /// <summary>
-    /// Scales a base <see cref="double"/> or <see cref="Thickness"/> (value one) by a per side
-    /// <see cref="Thickness"/> factor (value two) into the final <see cref="Thickness"/>.
-    /// </summary>
-    public static readonly IMultiValueConverter Scaler = new ThicknessScaler();
-
-    private sealed class ThicknessScaler : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values.Length < 2 || values[0] is not { } source || values[1] is not Thickness factor)
-                return DependencyProperty.UnsetValue;
-
-            return Scale(ToThickness(source, "Base"), factor);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-            => throw new NotSupportedException();
-    }
-
-    #endregion
-
     #region Resolution
 
     /// <summary>
@@ -311,7 +252,7 @@ public static class Derive
             element.SetResourceReference(source, key);
     }
 
-    internal static Thickness ToThickness(object source, string property) => source switch
+    private static Thickness ToThickness(object source, string property) => source switch
     {
         Thickness thickness => thickness,
         IConvertible convertible => new Thickness(convertible.ToDouble(null)),
@@ -327,7 +268,7 @@ public static class Derive
             $"Derive.CornerRadius expects a CornerRadius or a numeric resource, got {source.GetType().Name}.")
     };
 
-    internal static Thickness Scale(Thickness value, Thickness factor) => new(
+    private static Thickness Scale(Thickness value, Thickness factor) => new(
         value.Left * factor.Left,
         value.Top * factor.Top,
         value.Right * factor.Right,

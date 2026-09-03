@@ -446,6 +446,7 @@ public class ThemeCustomizerViewModel : ObservableObject
             new ThemeScaleStep("xl", "ControlFontSizeXl", 1.85));
 
         // ControlPadding thicknesses are symmetric (Left==Right, Top==Bottom), so one base per axis.
+        // The text input paddings are derived from these at half the horizontal, not edited on their own.
         Thickness padding = ReadThickness(JDimensions.ControlPaddingMd);
         Scale("Control padding", "md", 0, 40, padding.Left, padding.Top, "px",
             new ThemeScaleStep("xs", "ControlPaddingXs", 0.5),
@@ -542,6 +543,9 @@ public class ThemeCustomizerViewModel : ObservableObject
         RegenerateXaml();
     }
 
+    /// <summary>Horizontal ratio the text input paddings keep to the control paddings they follow.</summary>
+    private const double InputPaddingHorizontalFactor = 0.5;
+
     /// <summary>Pushes every derived step of a scale to its live resource.</summary>
     private static void ApplyScale(ThemeScaleEntry entry)
     {
@@ -553,7 +557,26 @@ public class ThemeCustomizerViewModel : ObservableObject
             else
                 res[DimensionKey(step.ResourceName)] = step.Value;
         }
+
+        // The input paddings are not edited on their own: they follow the control paddings at half the horizontal.
+        if (IsControlPadding(entry))
+            foreach (var step in entry.Steps)
+                res[InputPaddingKey(step.ResourceName)] = InputPaddingFrom(step);
     }
+
+    private static bool IsControlPadding(ThemeScaleEntry entry)
+        => entry.Steps.Count > 0 && entry.Steps[0].ResourceName.StartsWith("ControlPadding", StringComparison.Ordinal);
+
+    /// <summary>The input padding thickness derived from a control padding step.</summary>
+    private static Thickness InputPaddingFrom(ThemeScaleStep controlPaddingStep)
+    {
+        double h = controlPaddingStep.Value * InputPaddingHorizontalFactor;
+        return new Thickness(h, controlPaddingStep.Vertical, h, controlPaddingStep.Vertical);
+    }
+
+    /// <summary>The input padding key a control padding step feeds (e.g. <c>ControlPaddingSm</c> → <c>InputPaddingSm</c>).</summary>
+    private static ComponentResourceKey InputPaddingKey(string controlPaddingName)
+        => PaddingKey(controlPaddingName.Replace("Control", "Input", StringComparison.Ordinal));
 
     private void ApplyDimension(ThemeDimensionEntry entry)
     {
@@ -602,6 +625,9 @@ public class ThemeCustomizerViewModel : ObservableObject
                 res.Remove(key);
             foreach (var step in _allScales.SelectMany(scale => scale.Steps))
                 res.Remove(ScaleKey(step.ResourceName));
+            // Input paddings are derived from the control paddings, so drop their overrides too.
+            foreach (var step in _allScales.Where(IsControlPadding).SelectMany(scale => scale.Steps))
+                res.Remove(InputPaddingKey(step.ResourceName));
 
             // …then re-seed the editors from those restored values.
             foreach (var color in _allColors)
@@ -699,6 +725,10 @@ public class ThemeCustomizerViewModel : ObservableObject
         "ControlPaddingSm" => JDimensions.ControlPaddingSm,
         "ControlPaddingMd" => JDimensions.ControlPaddingMd,
         "ControlPaddingLg" => JDimensions.ControlPaddingLg,
+        "InputPaddingXs" => JDimensions.InputPaddingXs,
+        "InputPaddingSm" => JDimensions.InputPaddingSm,
+        "InputPaddingMd" => JDimensions.InputPaddingMd,
+        "InputPaddingLg" => JDimensions.InputPaddingLg,
         _ => throw new ArgumentOutOfRangeException(nameof(name), name, "Unknown padding"),
     };
 
@@ -788,6 +818,18 @@ public class ThemeCustomizerViewModel : ObservableObject
                     : $"    <system:Double x:Key=\"{{x:Static joufflu:Dimensions.{step.ResourceName}}}\">{Num(step.Value)}</system:Double>");
             }
             sb.AppendLine();
+
+            // The input paddings ride along with the control paddings, at half the horizontal.
+            if (IsControlPadding(scale))
+            {
+                sb.AppendLine("    <!--  Input padding (control padding at half the horizontal)  -->");
+                foreach (var step in scale.Steps)
+                {
+                    Thickness input = InputPaddingFrom(step);
+                    sb.AppendLine($"    <Thickness x:Key=\"{{x:Static joufflu:Dimensions.{step.ResourceName.Replace("Control", "Input")}}}\">{Num(input.Left)},{Num(input.Top)}</Thickness>");
+                }
+                sb.AppendLine();
+            }
         }
     }
 

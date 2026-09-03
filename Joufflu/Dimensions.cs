@@ -31,4 +31,10 @@ public static class Dimensions
     public static ComponentResourceKey ControlPaddingSm => new(typeof(Dimensions), "ControlPaddingSm");
     public static ComponentResourceKey ControlPaddingMd => new(typeof(Dimensions), "ControlPaddingMd");
     public static ComponentResourceKey ControlPaddingLg => new(typeof(Dimensions), "ControlPaddingLg");
+
+    // Text inputs read tighter than a button: their own padding, half the control padding's horizontal.
+    public static ComponentResourceKey InputPaddingXs => new(typeof(Dimensions), "InputPaddingXs");
+    public static ComponentResourceKey InputPaddingSm => new(typeof(Dimensions), "InputPaddingSm");
+    public static ComponentResourceKey InputPaddingMd => new(typeof(Dimensions), "InputPaddingMd");
+    public static ComponentResourceKey InputPaddingLg => new(typeof(Dimensions), "InputPaddingLg");
 }

@@ -51,6 +51,12 @@
     <Thickness x:Key="{x:Static joufflu:Dimensions.ControlPaddingMd}">12,4</Thickness>
     <Thickness x:Key="{x:Static joufflu:Dimensions.ControlPaddingLg}">18,6</Thickness>
 
+    <!--  Text input paddings (half the control padding's horizontal, tighter than a button)  -->
+    <Thickness x:Key="{x:Static joufflu:Dimensions.InputPaddingXs}">3,2</Thickness>
+    <Thickness x:Key="{x:Static joufflu:Dimensions.InputPaddingSm}">4.5,3</Thickness>
+    <Thickness x:Key="{x:Static joufflu:Dimensions.InputPaddingMd}">6,4</Thickness>
+    <Thickness x:Key="{x:Static joufflu:Dimensions.InputPaddingLg}">9,6</Thickness>
+
     <!--  Opacity applied to controls when IsEnabled="False"  -->
     <system:Double x:Key="{x:Static joufflu:Colors.DisabledOpacity}">0.5</system:Double>
 
